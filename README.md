@@ -1,2 +1,2 @@
 # gitTest
-hi friends
+hi noobs and friends
