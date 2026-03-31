@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3日間集中攻略マニュアル｜現場エンジニア速成ガイド</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+:root {
+  --bg:#07090f;--surface:#0f1521;--surface2:#161e2e;--surface3:#1c2840;
+  --border:#1e2d45;--border2:#243352;
+  --accent:#38bdf8;--accent2:#818cf8;--accent3:#f59e0b;--accent4:#34d399;
+  --text:#e2e8f0;--text-dim:#94a3b8;--text-muted:#4a6080;
+  --day1:#38bdf8;--day2:#818cf8;--day3:#34d399;--day4:#f59e0b;
+  --red:#f87171;--orange:#fb923c;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;line-height:1.75;font-size:14px;}
+​
+/* HERO */
+.hero{padding:56px 48px 48px;background:linear-gradient(160deg,#07090f 0%,#0b1220 60%,#070d18 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-120px;right:-60px;width:600px;height:600px;background:radial-gradient(circle,rgba(56,189,248,.05) 0%,transparent 65%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-100px;left:300px;width:400px;height:400px;background:radial-gradient(circle,rgba(129,140,248,.04) 0%,transparent 65%);pointer-events:none;}
+.badge{display:inline-block;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:3px;padding:3px 12px;border-radius:2px;margin-bottom:18px;text-transform:uppercase;}
+.hero h1{font-size:clamp(24px,3.5vw,44px);font-weight:900;line-height:1.2;letter-spacing:-1px;margin-bottom:10px;}
+.hero h1 .c1{color:var(--accent);}
+.hero h1 .c2{color:var(--accent2);}
+.hero-sub{color:var(--text-dim);font-size:13px;max-width:580px;margin-bottom:28px;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 14px;font-size:11px;color:var(--text-dim);}
+​
+/* NAV */
+.nav{background:var(--surface);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;position:sticky;top:0;z-index:100;padding:0 32px;}
+.tab{padding:14px 22px;font-size:12px;font-weight:700;letter-spacing:.5px;color:var(--text-muted);cursor:pointer;border:none;border-bottom:3px solid transparent;background:none;font-family:'Noto Sans JP',sans-serif;white-space:nowrap;transition:color .2s;}
+.tab:hover{color:var(--text-dim);}
+.tab.a1{color:var(--day1);border-bottom-color:var(--day1);}
+.tab.a2{color:var(--day2);border-bottom-color:var(--day2);}
+.tab.a3{color:var(--day3);border-bottom-color:var(--day3);}
+.tab.a4{color:var(--day4);border-bottom-color:var(--day4);}
+​
+/* LAYOUT */
+.wrap{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 160px);}
+.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:24px 0;position:sticky;top:47px;height:calc(100vh - 47px);overflow-y:auto;}
+.sb-section{margin-bottom:6px;}
+.sb-label{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--text-muted);padding:8px 20px 4px;text-transform:uppercase;}
+.sb-link{display:block;padding:6px 20px;font-size:12px;color:var(--text-dim);cursor:pointer;transition:all .15s;border-left:2px solid transparent;}
+.sb-link:hover{color:var(--text);background:var(--surface2);}
+.sb-link.active{color:var(--accent);border-left-color:var(--accent);background:rgba(56,189,248,.05);}
+​
+.main{padding:40px 48px;max-width:900px;}
+​
+/* SECTIONS */
+.day-section{display:none;}
+.day-section.active{display:block;}
+​
+.sec-header{margin-bottom:36px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.sec-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
+.d1 .sec-label{color:var(--day1);}
+.d2 .sec-label{color:var(--day2);}
+.d3 .sec-label{color:var(--day3);}
+.d4 .sec-label{color:var(--day4);}
+.sec-header h2{font-size:26px;font-weight:900;letter-spacing:-.5px;}
+.sec-header p{color:var(--text-dim);margin-top:8px;font-size:13px;}
+​
+/* TOPICS */
+.topic{margin-bottom:40px;scroll-margin-top:60px;}
+.topic-title{font-size:17px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.topic-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.d1 .topic-icon{background:rgba(56,189,248,.12);}
+.d2 .topic-icon{background:rgba(129,140,248,.12);}
+.d3 .topic-icon{background:rgba(52,211,153,.12);}
+.d4 .topic-icon{background:rgba(245,158,11,.12);}
+​
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:16px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;}
+.d1 .card::before{background:var(--day1);}
+.d2 .card::before{background:var(--day2);}
+.d3 .card::before{background:var(--day3);}
+.d4 .card::before{background:var(--day4);}
+.card h4{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text);}
+​
+/* CODE */
+.code{background:#050a12;border:1px solid #162030;border-radius:6px;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.75;overflow-x:auto;margin:10px 0;position:relative;}
+.code-label{position:absolute;top:8px;right:12px;font-size:10px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;font-family:'Noto Sans JP',sans-serif;}
+.cm{color:#3d5a7a;}.kw{color:#79b8ff;}.st{color:#9ecbff;}.an{color:#b392f0;}.tp{color:#f97583;}.mt{color:#b392f0;}.pm{color:#ffab70;}.vl{color:#79b8ff;}.hl{color:#38bdf8;}
+​
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin:10px 0;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+th{background:var(--surface2);padding:9px 14px;text-align:left;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--text-muted);border-bottom:1px solid var(--border);text-transform:uppercase;white-space:nowrap;}
+td{padding:9px 14px;border-bottom:1px solid rgba(30,45,69,.5);color:var(--text-dim);vertical-align:top;line-height:1.6;}
+td:first-child{color:var(--text);font-weight:500;white-space:nowrap;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+​
+/* ALERTS */
+.alert{border-radius:6px;padding:12px 16px;margin:10px 0;font-size:13px;display:flex;gap:10px;align-items:flex-start;line-height:1.65;}
+.ai{font-size:15px;flex-shrink:0;margin-top:1px;}
+.aw{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22);color:#fbbf24;}
+.ai-info{background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.18);color:var(--text-dim);}
+.as{background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.22);color:#6ee7b7;}
+.ae{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.22);color:#fca5a5;}
+​
+/* LISTS */
+ul.pts,ol.pts{padding-left:18px;}
+ul.pts li,ol.pts li{margin-bottom:7px;color:var(--text-dim);font-size:13px;line-height:1.7;}
+ul.pts li strong,ol.pts li strong{color:var(--text);}
+​
+/* STEP LIST */
+.steps{list-style:none;padding:0;}
+.steps li{display:flex;gap:12px;margin-bottom:10px;padding:13px 16px;background:var(--surface2);border-radius:6px;border:1px solid var(--border);align-items:flex-start;}
+.snum{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px;}
+.d1 .snum{background:rgba(56,189,248,.18);color:var(--day1);}
+.d2 .snum{background:rgba(129,140,248,.18);color:var(--day2);}
+.d3 .snum{background:rgba(52,211,153,.18);color:var(--day3);}
+.d4 .snum{background:rgba(245,158,11,.18);color:var(--day4);}
+.scontent strong{display:block;font-size:13px;color:var(--text);margin-bottom:3px;}
+.scontent span{font-size:12px;color:var(--text-muted);line-height:1.6;}
+​
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+@media(max-width:700px){.g2,.g3{grid-template-columns:1fr;}.wrap{grid-template-columns:1fr;}.sidebar{display:none;}.main{padding:24px 20px;}}
+.mini{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:14px 16px;}
+.mini h5{font-size:12px;font-weight:700;margin-bottom:6px;color:var(--text);}
+.mini p{font-size:12px;color:var(--text-muted);line-height:1.65;}
+​
+/* TAGS */
+.tag{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:1px;vertical-align:middle;margin-left:6px;text-transform:uppercase;}
+.tm{background:rgba(248,113,113,.14);color:#f87171;border:1px solid rgba(248,113,113,.28);}
+.tp2{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.28);}
+.tg{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.25);}
+​
+/* CHECKLIST */
+.cklist{list-style:none;padding:0;}
+.cklist li{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(30,45,69,.5);font-size:13px;color:var(--text-dim);}
+.cklist li:last-child{border-bottom:none;}
+.chk{width:17px;height:17px;border:1.5px solid var(--border2);border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;font-size:9px;}
+.chk:hover{border-color:var(--accent);}
+.chk.done{background:var(--accent4);border-color:var(--accent4);color:#fff;}
+​
+hr{border:none;border-top:1px solid var(--border);margin:20px 0;}
+p.lead{color:var(--text-dim);font-size:13px;margin-bottom:12px;line-height:1.75;}
+.divider{height:1px;background:var(--border);margin:28px 0;}
+code.inline{background:rgba(56,189,248,.1);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:1px 6px;border-radius:3px;}
+​
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+</style>
+</head>
+<body>
+​
+<div class="hero">
+  <div class="badge">3-DAY INTENSIVE</div>
+  <h1><span class="c1">3日間</span>で現場に<span class="c2">追いつく</span>集中攻略マニュアル</h1>
+  <p class="hero-sub">Java / Spring Boot × JavaScript / TypeScript × Linux — Web業務システム開発（詳細設計・実装・結合テスト）完全対応版。コード例・つまずきポイント・現場の暗黙知を詰め込んだ。</p>
+  <div class="hero-chips">
+    <span class="chip">☕ Java / Spring Boot</span>
+    <span class="chip">📜 JavaScript / TypeScript</span>
+    <span class="chip">🐧 Linux</span>
+    <span class="chip">🗄️ MyBatis / JPA</span>
+    <span class="chip">🧪 JUnit5 / Mockito</span>
+    <span class="chip">🌿 Git Flow</span>
+  </div>
+</div>
+​
+<nav class="nav">
+  <button class="tab a1" onclick="showDay('d1',this)">📘 Day 1｜設計・Git・Linux</button>
+  <button class="tab" onclick="showDay('d2',this)">💜 Day 2｜Java/Spring 実装</button>
+  <button class="tab" onclick="showDay('d3',this)">💚 Day 3｜結合テスト</button>
+  <button class="tab" onclick="showDay('d4',this)">⚡ 現場サバイバル術</button>
+</nav>
+​
+<div class="wrap">
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-section">
+    <div class="sb-label">Day 1</div>
+    <a class="sb-link" onclick="scrollTo('d1-design')">詳細設計書の読み方</a>
+    <a class="sb-link" onclick="scrollTo('d1-table')">テーブル定義書</a>
+    <a class="sb-link" onclick="scrollTo('d1-git')">Gitフロー</a>
+    <a class="sb-link" onclick="scrollTo('d1-commit')">コミットメッセージ</a>
+    <a class="sb-link" onclick="scrollTo('d1-pr')">PR説明文の書き方</a>
+    <a class="sb-link" onclick="scrollTo('d1-review')">コードレビューの受け方</a>
+    <a class="sb-link" onclick="scrollTo('d1-linux')">Linuxコマンド</a>
+    <a class="sb-link" onclick="scrollTo('d1-screen')">画面設計書の読み方</a>
+    <a class="sb-link" onclick="scrollTo('d1-check')">Day1チェックリスト</a>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Day 2</div>
+    <a class="sb-link" onclick="scrollTo('d2-arch')">Spring Boot 構造</a>
+    <a class="sb-link" onclick="scrollTo('d2-controller')">Controller 実装</a>
+    <a class="sb-link" onclick="scrollTo('d2-service')">Service 実装</a>
+    <a class="sb-link" onclick="scrollTo('d2-repo')">Repository / DB操作</a>
+    <a class="sb-link" onclick="scrollTo('d2-valid')">バリデーション</a>
+    <a class="sb-link" onclick="scrollTo('d2-ex')">例外ハンドリング</a>
+    <a class="sb-link" onclick="scrollTo('d2-lombok')">Lombok早見表</a>
+    <a class="sb-link" onclick="scrollTo('d2-ts')">TypeScript連携</a>
+    <a class="sb-link" onclick="scrollTo('d2-check')">Day2チェックリスト</a>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Day 3</div>
+    <a class="sb-link" onclick="scrollTo('d3-types')">テスト種別</a>
+    <a class="sb-link" onclick="scrollTo('d3-junit')">JUnit5 基礎</a>
+    <a class="sb-link" onclick="scrollTo('d3-mock')">Mockito 完全版</a>
+    <a class="sb-link" onclick="scrollTo('d3-mvc')">MVCテスト</a>
+    <a class="sb-link" onclick="scrollTo('d3-design')">テストケース設計</a>
+    <a class="sb-link" onclick="scrollTo('d3-bug')">バグ票の書き方</a>
+    <a class="sb-link" onclick="scrollTo('d3-check')">Day3チェックリスト</a>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">サバイバル</div>
+    <a class="sb-link" onclick="scrollTo('d4-q')">質問の作法</a>
+    <a class="sb-link" onclick="scrollTo('d4-task')">タスク管理</a>
+    <a class="sb-link" onclick="scrollTo('d4-err')">エラー対処</a>
+    <a class="sb-link" onclick="scrollTo('d4-words')">現場用語辞典</a>
+  </div>
+</aside>
+​
+<main class="main">
+​
+<!-- ============================================================ DAY 1 -->
+<div id="d1" class="day-section d1 active">
+  <div class="sec-header">
+    <div class="sec-label">Day 1</div>
+    <h2>開発プロセス・詳細設計・Git・Linux</h2>
+    <p>現場の「当たり前」を1日でインストールする。技術力より先にここを制圧すれば、初日から「わかってる人」に見える。</p>
+  </div>
+​
+  <!-- ===== 詳細設計書 ===== -->
+  <div class="topic" id="d1-design">
+    <div class="topic-title"><span class="topic-icon">📄</span>詳細設計書の読み方 <span class="tag tm">MUST</span></div>
+​
+    <p class="lead">詳細設計書は「コードより先に書かれたコードの設計図」。読めないまま実装すると確実に手戻りが発生する。以下の5要素を順番に確認する習慣をつける。</p>
+​
+    <div class="card">
+      <h4>① 処理フロー図（フローチャート・シーケンス図）</h4>
+      <p class="lead">正常系と異常系の分岐を把握する。設計書では正常系しか書いていないことが多い。「このケースではどうなるか？」を意識して読む。</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>記号</th><th>意味</th><th>見るポイント</th></tr>
+          <tr><td>□ 四角</td><td>処理・操作</td><td>何をする処理か</td></tr>
+          <tr><td>◇ ひし形</td><td>条件分岐（if）</td><td>条件が何か・どちらのルートが正常系か</td></tr>
+          <tr><td>⊳ 矢印</td><td>処理の流れ</td><td>ループしているか・終端があるか</td></tr>
+          <tr><td>楕円</td><td>開始・終了</td><td>どこで処理が終わるか</td></tr>
+        </table>
+      </div>
+      <div class="alert aw"><span class="ai">⚠️</span><span>シーケンス図に「異常系はシステムエラーとして処理」と書いてある場合、具体的な仕様が省略されている。実装前に「エラー時のレスポンス形式はどうなりますか？」と確認する。</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>② API仕様（リクエスト・レスポンス定義）</h4>
+      <p class="lead">APIの仕様書で最重要な確認事項。</p>
+      <div class="code"><span class="cm">// 設計書のAPI仕様例（こういう書き方で来ることが多い）</span>
+<span class="hl">POST /api/users</span>
+​
+リクエスト:
+{
+  <span class="st">"name"</span>: <span class="st">"string"</span>,       <span class="cm">// 必須・最大50文字</span>
+  <span class="st">"email"</span>: <span class="st">"string"</span>,      <span class="cm">// 必須・メール形式</span>
+  <span class="st">"age"</span>: <span class="st">"integer"</span>,      <span class="cm">// 任意・0〜150</span>
+  <span class="st">"departmentId"</span>: <span class="st">"long"</span> <span class="cm">// 必須・部署マスタに存在すること</span>
+}
+​
+レスポンス (201 Created):
+{
+  <span class="st">"userId"</span>: <span class="st">"long"</span>,
+  <span class="st">"name"</span>: <span class="st">"string"</span>,
+  <span class="st">"createdAt"</span>: <span class="st">"string"</span> <span class="cm">// ISO8601形式</span>
+}
+​
+エラー (400 Bad Request):
+{
+  <span class="st">"errorCode"</span>: <span class="st">"string"</span>, <span class="cm">// 例: "ERR_VALIDATION_001"</span>
+  <span class="st">"message"</span>: <span class="st">"string"</span>
+}</div>
+​
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>確認項目</th><th>なぜ重要か</th></tr>
+          <tr><td>nullable かどうか</td><td>nullを許可するか否かでバリデーションが変わる</td></tr>
+          <tr><td>型（integer/long/string）</td><td>JavaのInt/Long/Stringと対応させる</td></tr>
+          <tr><td>日付形式</td><td>ISO8601・yyyyMMdd・タイムゾーン付きかで実装が変わる</td></tr>
+          <tr><td>リスト返却か単体か</td><td>ResponseEntityの型が変わる</td></tr>
+          <tr><td>業務ルール（存在チェック等）</td><td>DBアクセスが必要な場合は Service層に実装が必要</td></tr>
+        </table>
+      </div>
+    </div>
+​
+    <div class="card">
+      <h4>③ バリデーション一覧</h4>
+      <p class="lead">入力チェック条件が一覧になっている。これを見落とすと「仕様漏れ」になる。</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>バリデーション種別</th><th>実装方法</th><th>例</th></tr>
+          <tr><td>必須チェック</td><td>@NotBlank / @NotNull</td><td>名前は必須</td></tr>
+          <tr><td>桁数チェック</td><td>@Size / @Length</td><td>名前は50文字以内</td></tr>
+          <tr><td>形式チェック</td><td>@Email / @Pattern</td><td>メール形式・電話番号形式</td></tr>
+          <tr><td>範囲チェック</td><td>@Min / @Max</td><td>年齢は0〜150</td></tr>
+          <tr><td>業務チェック</td><td>Service層で手実装</td><td>メール重複・部署存在チェック</td></tr>
+        </table>
+      </div>
+      <div class="alert ai-info"><span class="ai">💡</span><span>アノテーションで対応できる「形式チェック」と、DBアクセスが必要な「業務チェック」は必ず分けて考える。業務チェックをController層に書くのは絶対NG。</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>④ エラーコード・エラーメッセージ一覧</h4>
+      <p class="lead">業務エラーとシステムエラーは別管理されていることが多い。</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>エラー種別</th><th>HTTPステータス</th><th>例</th></tr>
+          <tr><td>バリデーションエラー</td><td>400 Bad Request</td><td>ERR_001: 名前は必須です</td></tr>
+          <tr><td>認証エラー</td><td>401 Unauthorized</td><td>ERR_002: ログインが必要です</td></tr>
+          <tr><td>権限エラー</td><td>403 Forbidden</td><td>ERR_003: 権限がありません</td></tr>
+          <tr><td>リソース未発見</td><td>404 Not Found</td><td>ERR_004: ユーザーが見つかりません</td></tr>
+          <tr><td>業務エラー</td><td>409 Conflict</td><td>ERR_005: メールアドレスが既に存在します</td></tr>
+          <tr><td>システムエラー</td><td>500 Internal Server Error</td><td>ERR_999: システムエラーが発生しました</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+​
+  <!-- ===== テーブル定義 ===== -->
+  <div class="topic" id="d1-table">
+    <div class="topic-title"><span class="topic-icon">🗄️</span>テーブル定義書の読み方 <span class="tag tm">MUST</span></div>
+​
+    <p class="lead">「論理名」と「物理名」は別物。設計書は論理名で書かれ、コードは物理名を使う。この対応を常に意識する。</p>
+​
+    <div class="card">
+      <h4>論理名・物理名の対応表（実例）</h4>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>論理名（設計書に書いてある）</th><th>物理名（実際のカラム名）</th><th>型</th><th>制約</th></tr>
+          <tr><td>ユーザーID</td><td>user_id</td><td>BIGINT</td><td>PK, AUTO_INCREMENT</td></tr>
+          <tr><td>氏名</td><td>name</td><td>VARCHAR(50)</td><td>NOT NULL</td></tr>
+          <tr><td>メールアドレス</td><td>email</td><td>VARCHAR(255)</td><td>NOT NULL, UNIQUE</td></tr>
+          <tr><td>削除フラグ</td><td>del_flg</td><td>TINYINT(1)</td><td>NOT NULL, DEFAULT 0</td></tr>
+          <tr><td>登録日時</td><td>created_at</td><td>DATETIME</td><td>NOT NULL</td></tr>
+          <tr><td>更新日時</td><td>updated_at</td><td>DATETIME</td><td>NOT NULL</td></tr>
+        </table>
+      </div>
+      <div class="alert aw"><span class="ai">⚠️</span><span><strong>削除フラグ（del_flg）は要注意。</strong>物理削除（DELETE文）ではなく論理削除（del_flg=1に更新）を使う現場が多い。SELECTのWHERE句に <code class="inline">AND del_flg = 0</code> を忘れると、削除済みデータも取れてしまうバグになる。</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>制約の種類と意味</h4>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>制約</th><th>意味</th><th>実装への影響</th></tr>
+          <tr><td>NOT NULL</td><td>nullを許可しない</td><td>@NotNull / @NotBlank でバリデーション必須</td></tr>
+          <tr><td>UNIQUE</td><td>重複を許可しない</td><td>Serviceで重複チェック or DBのUNIQUE制約エラーをハンドリング</td></tr>
+          <tr><td>DEFAULT 0</td><td>未指定時のデフォルト値</td><td>INSERT時に指定しなくてもOK</td></tr>
+          <tr><td>FK（外部キー）</td><td>他テーブルとの参照関係</td><td>参照先が存在するか業務チェックが必要なことがある</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+​
+  <!-- ===== Git ===== -->
+  <div class="topic" id="d1-git">
+    <div class="topic-title"><span class="topic-icon">🌿</span>Gitフロー完全理解 <span class="tag tm">MUST</span></div>
+​
+    <p class="lead">個人開発と違い、現場では厳格なブランチ戦略がある。間違ったブランチで作業すると最悪リリースコードを壊す。</p>
+​
+    <div class="card">
+      <h4>ブランチの役割と触り方</h4>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>ブランチ名</th><th>役割</th><th>直接push</th><th>作業できるか</th></tr>
+          <tr><td>main / master</td><td>本番リリース済みコード</td><td>❌ 絶対NG</td><td>❌</td></tr>
+          <tr><td>develop</td><td>開発統合（次リリース候補）</td><td>❌ PRのみ</td><td>❌</td></tr>
+          <tr><td>feature/タスクID-概要</td><td>機能実装（ここで作業）</td><td>✅ OK</td><td>✅ ここだけ</td></tr>
+          <tr><td>release/x.x.x</td><td>リリース準備・最終確認</td><td>❌ バグfixのみ</td><td>⚠️ 限定的</td></tr>
+          <tr><td>hotfix/概要</td><td>本番緊急バグ修正</td><td>✅ OK</td><td>⚠️ 緊急時のみ</td></tr>
+        </table>
+      </div>
+    </div>
+​
+    <div class="card">
+      <h4>毎日の作業フロー（手順を体で覚える）</h4>
+      <div class="code"><span class="cm">## ① 作業開始：ブランチを作る</span>
+git checkout develop
+git pull origin develop            <span class="cm"># 最新にする（必ず！）</span>
+git checkout -b feature/123-user-register
+<span class="cm"># ブランチ名の例：feature/チケットID-概要（英語小文字・ハイフン区切り）</span>
+​
+<span class="cm">## ② 実装する</span>
+<span class="cm"># ... コードを書く ...</span>
+​
+<span class="cm">## ③ コミット（小さく・意味のある単位で）</span>
+git status                         <span class="cm"># 変更ファイルを確認</span>
+git diff                           <span class="cm"># 変更内容を確認</span>
+git add -p                         <span class="cm"># -p で差分を見ながら追加（重要！）</span>
+git commit -m "feat: ユーザー登録APIの実装 (#123)"
+​
+<span class="cm">## ④ 他の人の変更を取り込む（毎朝やる）</span>
+git fetch origin
+git rebase origin/develop          <span class="cm"># merge より rebase（履歴が綺麗になる）</span>
+<span class="cm"># コンフリクトが出たら → 後述のコンフリクト解消を参照</span>
+​
+<span class="cm">## ⑤ プッシュ・PR作成</span>
+git push origin feature/123-user-register
+<span class="cm"># → GitHubでPull Requestを作成</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>コンフリクト解消の手順（必ず来る）</h4>
+      <div class="code"><span class="cm"># rebase 中にコンフリクトが発生した場合</span>
+git rebase origin/develop
+<span class="cm"># → CONFLICT (content): Merge conflict in src/main/java/...UserService.java</span>
+​
+<span class="cm"># 1. コンフリクトファイルを開いて編集</span>
+<span class="cm"># ファイル内にこんな表示が出る：</span>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD（自分の変更）
+    String result = processA();
+=======（区切り線）
+    String result = processB();
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; origin/develop（取り込む変更）
+​
+<span class="cm"># 2. 正しいコードに書き直す（&lt;&lt;&lt;&lt;&lt;&lt;&lt; ======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; の行は消す）</span>
+    String result = processA();  <span class="cm">// ← 正しい方だけ残す</span>
+​
+<span class="cm"># 3. ステージして rebase 続行</span>
+git add src/main/java/...UserService.java
+git rebase --continue
+​
+<span class="cm"># やり直したい場合</span>
+git rebase --abort</div>
+      <div class="alert aw"><span class="ai">⚠️</span><span>コンフリクト解消は「自分の変更」と「相手の変更」どちらが正しいかを<strong>コードを読んで判断する</strong>。わからなければ一人で判断せず、変更した人に確認する。</span></div>
+    </div>
+  </div>
+​
+  <!-- ===== コミットメッセージ ===== -->
+  <div class="topic" id="d1-commit">
+    <div class="topic-title"><span class="topic-icon">📝</span>コミットメッセージの書き方 <span class="tag tp2">重要</span></div>
+​
+    <div class="card">
+      <h4>Conventional Commits 形式（現場でよく使われる）</h4>
+      <div class="code"><span class="cm">## 形式</span>
+&lt;type&gt;: &lt;概要&gt; (#チケット番号)
+​
+<span class="cm">## type の種類</span>
+feat:     新機能の追加
+fix:      バグ修正
+refactor: リファクタリング（機能変更なし）
+test:     テストの追加・修正
+docs:     ドキュメント修正
+style:    コードスタイル修正（空白・セミコロン等）
+chore:    ビルド設定・依存関係の更新
+​
+<span class="cm">## 良い例</span>
+feat: ユーザー登録APIの実装 (#123)
+fix: メールアドレス重複チェックの条件を修正 (#124)
+test: UserServiceの単体テストを追加 (#123)
+refactor: UserServiceのcreateメソッドを分割 (#125)
+​
+<span class="cm">## 悪い例（これは絶対やらない）</span>
+修正した
+update
+WIP
+あとで直す</div>
+      <div class="alert as"><span class="ai">✅</span><span>「過去に何をしたか」がコミットログから追えることが大事。1ヶ月後に自分や他人がgit logを見たときに「このコミットで何をしたか」がすぐわかるように書く。</span></div>
+    </div>
+  </div>
+​
+  <!-- ===== PR ===== -->
+  <div class="topic" id="d1-pr">
+    <div class="topic-title"><span class="topic-icon">🔀</span>PR説明文の書き方 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>現場標準テンプレート</h4>
+      <div class="code"><span class="cm">## 概要</span>
+ユーザー登録APIにメールアドレス重複チェックを追加。
+​
+<span class="cm">## 変更内容</span>
+- UserService#create にメールアドレス重複チェック処理を追加
+- 重複時は BusinessException（ERR_001）をスロー
+- GlobalExceptionHandler に ERR_001 のハンドリングを追加
+- 単体テスト追加（正常系1件・異常系2件）
+​
+<span class="cm">## 背景・理由</span>
+設計書 #45 の「メールアドレスはシステム内で一意」要件への対応。
+既存のUserRepositoryに existsByEmail メソッドを追加して対応した。
+​
+<span class="cm">## 確認してほしいこと</span>
+- UserService.java の34行目：重複チェックのタイミングが仕様と合っているか
+- 例外のHTTPステータスを409にしたが、設計書では未記載のため確認をお願いしたい
+​
+<span class="cm">## スクリーンショット（画面変更がある場合）</span>
+（省略）
+​
+<span class="cm">## 関連チケット</span>
+Closes #123</div>
+​
+      <div class="tbl-wrap" style="margin-top:16px;">
+        <table>
+          <tr><th>項目</th><th>なぜ書くか</th><th>書かないとどうなるか</th></tr>
+          <tr><td>概要</td><td>PRの目的を一言で伝える</td><td>レビュアーが何のPRか把握できない</td></tr>
+          <tr><td>変更内容</td><td>何を変えたかを箇条書きで</td><td>コード全部を読まないと変更点がわからない</td></tr>
+          <tr><td>背景・理由</td><td>なぜそう実装したか</td><td>「なぜこの実装？」がレビューで大量に来る</td></tr>
+          <tr><td>確認ポイント</td><td>不安な箇所を先出しする</td><td>バグを黙って出すことになる</td></tr>
+          <tr><td>関連チケット</td><td>タスクとコードを紐づける</td><td>なぜこの変更が必要か追跡できなくなる</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+​
+  <!-- ===== コードレビュー ===== -->
+  <div class="topic" id="d1-review">
+    <div class="topic-title"><span class="topic-icon">👁️</span>コードレビューの受け方 <span class="tag tp2">重要</span></div>
+​
+    <div class="card">
+      <h4>レビューコメントへの返し方パターン集</h4>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>状況</th><th>返し方の例</th></tr>
+          <tr><td>修正完了した</td><td>「ご指摘ありがとうございます。〇〇という理解で修正しました。ご確認よろしくお願いします。」</td></tr>
+          <tr><td>コメントの意図がわからない</td><td>「〜という理解でよいでしょうか？確認させてください。」</td></tr>
+          <tr><td>自分の実装に理由がある</td><td>「〜という理由でこの実装にしましたが、ご指摘の方法の方がよければ修正します。」</td></tr>
+          <tr><td>nit: コメント</td><td>「修正しました（または：承知しました、次回から気をつけます）」</td></tr>
+          <tr><td>仕様の確認が必要な場合</td><td>「設計書〇〇ページに〜とあるため、この実装にしましたが、仕様の解釈が正しいか確認させてください。」</td></tr>
+        </table>
+      </div>
+​
+      <h4 style="margin-top:18px;">やってはいけないこと</h4>
+      <ul class="pts">
+        <li><strong>無言で修正してコメントを解決済みにする</strong>——どう修正したかを必ず返信する</li>
+        <li><strong>大量の変更を一つのPRに詰め込む</strong>——1PRは1つの目的に絞る</li>
+        <li><strong>レビュー依頼せずに自己マージする</strong>——たとえ急いでいても必ずレビューを通す</li>
+        <li><strong>「後で直します」と返してそのまま</strong>——後でのタスクはチケットを切って管理する</li>
+      </ul>
+    </div>
+  </div>
+​
+  <!-- ===== Linux ===== -->
+  <div class="topic" id="d1-linux">
+    <div class="topic-title"><span class="topic-icon">🐧</span>現場で使うLinuxコマンド <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>ログ確認（現場で一番使う）</h4>
+      <div class="code"><span class="cm"># リアルタイムでログを追う（サーバーで作業中は常に開いておく）</span>
+tail -f /var/log/app/application.log
+​
+<span class="cm"># 直近100行だけ見る</span>
+tail -100 /var/log/app/application.log
+​
+<span class="cm"># エラーが含まれる行だけ抽出</span>
+grep ERROR /var/log/app/application.log
+grep -i "exception" /var/log/app/application.log   <span class="cm"># -i で大文字小文字を無視</span>
+grep -n "NullPointerException" *.log               <span class="cm"># -n で行番号表示</span>
+​
+<span class="cm"># 特定日付のログだけ見る</span>
+grep "2024-01-15" /var/log/app/application.log
+​
+<span class="cm"># エラーの前後5行を表示（文脈を把握するのに便利）</span>
+grep -A 5 -B 5 "ERROR" application.log
+​
+<span class="cm"># tail + grep を組み合わせる（リアルタイムでエラーだけ見る）</span>
+tail -f application.log | grep --line-buffered ERROR</div>
+​
+      <div class="alert ai-info"><span class="ai">💡</span><span>スタックトレースは「Caused by:」の行が本当の原因。エラーログが大量に出ても、<code class="inline">grep "Caused by:" application.log</code> で本質を絞り込める。</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>ファイル操作・検索</h4>
+      <div class="code"><span class="cm"># ファイル・ディレクトリ一覧（詳細表示）</span>
+ls -la                              <span class="cm"># 隠しファイルも含む詳細表示</span>
+ls -lh                              <span class="cm"># ファイルサイズを人間が読みやすい形式で</span>
+​
+<span class="cm"># ファイル検索</span>
+find . -name "UserService.java"     <span class="cm"># ファイル名で検索</span>
+find . -name "*.java" -type f       <span class="cm"># Javaファイルをすべて検索</span>
+find . -mtime -1                    <span class="cm"># 1日以内に更新されたファイル</span>
+​
+<span class="cm"># ファイル内容確認</span>
+cat -n UserService.java             <span class="cm"># 行番号付きで全表示</span>
+less UserService.java               <span class="cm"># スクロール可能な表示（q で終了）</span>
+head -20 UserService.java           <span class="cm"># 先頭20行</span>
+​
+<span class="cm"># ファイルコピー・移動</span>
+cp source.txt dest.txt
+cp -r src/ dest/                    <span class="cm"># ディレクトリをコピー</span>
+mv oldname.txt newname.txt
+​
+<span class="cm"># ファイル内テキスト検索（コードベース全体から検索）</span>
+grep -r "メソッド名" src/           <span class="cm"># ディレクトリ再帰検索</span>
+grep -rn "UserService" --include="*.java" src/  <span class="cm"># Javaファイルのみ</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>プロセス・ネットワーク確認</h4>
+      <div class="code"><span class="cm"># プロセス確認</span>
+ps aux | grep java                  <span class="cm"># Javaプロセスの確認</span>
+ps aux | grep -v grep | grep java   <span class="cm"># grep自身を除外</span>
+​
+<span class="cm"># ポート使用確認（「8080が使われている」エラー時に使う）</span>
+lsof -i :8080                       <span class="cm"># 8080番ポートを使っているプロセス</span>
+netstat -tlnp | grep 8080           <span class="cm"># netstat版</span>
+ss -tlnp | grep 8080                <span class="cm"># ss版（netstatより新しい）</span>
+​
+<span class="cm"># プロセス強制終了（Spring Bootが止まらない時）</span>
+kill -9 &lt;PID&gt;                       <span class="cm"># PIDはps auxで確認</span>
+​
+<span class="cm"># ディスク使用量確認</span>
+df -h                               <span class="cm"># ディスク全体の使用量</span>
+du -sh /var/log/                    <span class="cm"># 特定ディレクトリのサイズ</span>
+du -sh /* | sort -rh | head -10     <span class="cm"># 大きいディレクトリTOP10</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>権限・環境変数</h4>
+      <div class="code"><span class="cm"># 権限確認と変更</span>
+ls -la script.sh                    <span class="cm"># 権限確認（-rw-r--r-- など）</span>
+chmod 755 script.sh                 <span class="cm"># 実行権限付与（rwxr-xr-x）</span>
+chmod +x script.sh                  <span class="cm"># 実行権限のみ付与</span>
+​
+<span class="cm"># 環境変数</span>
+env                                 <span class="cm"># 全環境変数一覧</span>
+echo $JAVA_HOME                     <span class="cm"># 特定の環境変数を確認</span>
+export APP_ENV=production           <span class="cm"># 環境変数を設定（セッション中のみ）</span>
+​
+<span class="cm"># よく使うパイプの組み合わせ</span>
+cat access.log | awk '{print $7}' | sort | uniq -c | sort -rn | head -20
+<span class="cm"># → アクセスログからURLごとのアクセス数TOP20</span>
+​
+cat application.log | grep ERROR | awk '{print $1,$2}' | uniq -c
+<span class="cm"># → エラーの時刻ごとの件数（障害発生時刻の特定に使う）</span></div>
+    </div>
+  </div>
+​
+  <!-- ===== 画面設計 ===== -->
+  <div class="topic" id="d1-screen">
+    <div class="topic-title"><span class="topic-icon">🖥️</span>画面設計書の読み方・活用法 <span class="tag tm">MUST</span></div>
+​
+    <p class="lead">画面設計書はフロントエンド実装・バックエンドAPI設計・テストの3つ全てに影響する。「どの画面から何のAPIを叩くか」「何を表示・入力するか」を設計書から正確に読み取る技術が必要。</p>
+​
+    <div class="card">
+      <h4>画面設計書の5要素</h4>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>要素</th><th>内容</th><th>実装への影響</th></tr>
+          <tr><td>画面ID・画面名</td><td>SCR-001「ユーザー登録画面」など</td><td>コンポーネント名・URLパスの命名規約に使う</td></tr>
+          <tr><td>画面レイアウト</td><td>ワイヤーフレーム・モックアップ</td><td>HTMLの構造・CSSのレイアウト設計の元になる</td></tr>
+          <tr><td>項目定義</td><td>各入力欄・表示欄の仕様</td><td>DTOのフィールド名・バリデーション定義の元になる</td></tr>
+          <tr><td>イベント定義</td><td>ボタン押下時・画面遷移条件</td><td>APIの呼び出しタイミング・エラー時の処理に直結</td></tr>
+          <tr><td>画面遷移図</td><td>どの画面からどの画面に遷移するか</td><td>ルーティング設計・認証・パンくずリストの実装に使う</td></tr>
+        </table>
+      </div>
+    </div>
+​
+    <div class="card">
+      <h4>項目定義表の読み方（最重要）</h4>
+      <p class="lead">画面設計書の核心。この表を正確に読めるだけで実装スピードが大きく変わる。</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>項目ID</th><th>項目名（論理）</th><th>項目名（物理）</th><th>型</th><th>必須</th><th>桁数</th><th>備考</th></tr>
+          <tr><td>I01</td><td>氏名</td><td>name</td><td>テキスト</td><td>○</td><td>50文字以内</td><td>全角・半角可</td></tr>
+          <tr><td>I02</td><td>メールアドレス</td><td>email</td><td>テキスト</td><td>○</td><td>255文字以内</td><td>メール形式チェック</td></tr>
+          <tr><td>I03</td><td>年齢</td><td>age</td><td>数値</td><td>×</td><td>3桁以内</td><td>0〜150の整数</td></tr>
+          <tr><td>D01</td><td>登録日時</td><td>createdAt</td><td>日時</td><td>—</td><td>—</td><td>表示のみ（入力不可）</td></tr>
+        </table>
+      </div>
+      <div class="alert aw"><span class="ai">⚠️</span><span>項目ID の先頭文字に注目：<strong>I（Input）= 入力欄</strong>、<strong>D（Display）= 表示のみ</strong>、<strong>B（Button）= ボタン</strong> というルールが多い。現場によって異なるので確認を。</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>イベント定義の読み方（ボタン・操作の仕様）</h4>
+      <div class="code"><span class="cm">// イベント定義表（こういう書き方で来ることが多い）</span>
+​
+イベントID: EVT-001
+トリガー   : 「登録」ボタン押下
+前提条件   : 必須項目が全て入力されている
+処理内容   :
+  1. 入力値のバリデーションチェック（クライアント側）
+  2. POST /api/users を呼び出す
+  3. 成功(201)の場合 → 完了画面（SCR-002）へ遷移
+  4. バリデーションエラー(400)の場合 → エラーメッセージを各入力欄の下に表示
+  5. 業務エラー(409)の場合 → 画面上部にエラーバナーを表示
+  6. システムエラー(500)の場合 → エラーダイアログを表示
+​
+<span class="cm">// ↑ これをそのままTypeScriptのonSubmit関数に落とし込む</span></div>
+​
+      <div class="code"><span class="cm">// 上記イベント定義をTypeScriptで実装した例</span>
+<span class="kw">const</span> <span class="mt">handleSubmit</span> = <span class="kw">async</span> (data: <span class="tp">UserCreateRequest</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="cm">// 処理2: API呼び出し</span>
+    <span class="kw">await</span> <span class="mt">createUser</span>(data);
+    <span class="cm">// 処理3: 成功 → 完了画面へ遷移</span>
+    router.<span class="mt">push</span>(<span class="st">'/users/complete'</span>);
+​
+  } <span class="kw">catch</span> (error) {
+    <span class="kw">if</span> (error.status === <span class="vl">400</span>) {
+      <span class="cm">// 処理4: バリデーションエラー → 各フィールドにエラー表示</span>
+      <span class="mt">setFieldErrors</span>(error.errors);
+    } <span class="kw">else if</span> (error.status === <span class="vl">409</span>) {
+      <span class="cm">// 処理5: 業務エラー → バナー表示</span>
+      <span class="mt">setBannerError</span>(error.message);
+    } <span class="kw">else</span> {
+      <span class="cm">// 処理6: システムエラー → ダイアログ表示</span>
+      <span class="mt">setDialogError</span>(<span class="st">'システムエラーが発生しました'</span>);
+    }
+  }
+};</div>
+    </div>
+​
+    <div class="card">
+      <h4>画面遷移図の読み方</h4>
+      <p class="lead">どの画面からどの画面に・どの条件で遷移するかを把握する。URLルーティングと認証制御の設計に直結する。</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>遷移元</th><th>操作・条件</th><th>遷移先</th><th>パラメータ</th></tr>
+          <tr><td>SCR-001 ユーザー登録</td><td>「登録」ボタン押下（成功）</td><td>SCR-002 登録完了</td><td>userId（クエリパラメータ）</td></tr>
+          <tr><td>SCR-001 ユーザー登録</td><td>「キャンセル」ボタン押下</td><td>SCR-010 一覧画面</td><td>なし</td></tr>
+          <tr><td>SCR-002 登録完了</td><td>「一覧へ戻る」ボタン</td><td>SCR-010 一覧画面</td><td>なし</td></tr>
+          <tr><td>SCR-010 一覧画面</td><td>未ログイン状態でアクセス</td><td>SCR-000 ログイン画面</td><td>redirect（元URL）</td></tr>
+        </table>
+      </div>
+      <div class="alert ai-info"><span class="ai">💡</span><span>「未ログイン → ログイン画面へリダイレクト」のような遷移は、ルーティング設定（React Router / Vue Router）に落とし込む。遷移図を見ながら認証ガード（PrivateRoute等）の設計をする。</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>画面設計書から実装に落とし込むチェックポイント</h4>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>確認項目</th><th>確認内容</th><th>見落とすとどうなるか</th></tr>
+          <tr><td>初期表示データ</td><td>画面を開いたときに何のAPIを叩くか</td><td>画面が空白で表示される・初期値がない</td></tr>
+          <tr><td>プルダウン・選択肢</td><td>マスタデータをAPIから取るか・固定値か</td><td>選択肢が空になる・追加時に対応できない</td></tr>
+          <tr><td>ページネーション</td><td>件数・ページ数・ソート順の仕様</td><td>大量データで画面が固まる</td></tr>
+          <tr><td>入力値の保持</td><td>バリデーションエラー時に入力値を消さない</td><td>エラー後に入力しなおしになってUXが悪い</td></tr>
+          <tr><td>読み取り専用項目</td><td>「表示のみ」項目は disabled にする</td><td>ユーザーが入力できてしまいAPIエラーになる</td></tr>
+          <tr><td>確認ダイアログ</td><td>削除・更新時の「よろしいですか？」の有無</td><td>誤操作が発生する</td></tr>
+          <tr><td>ローディング表示</td><td>API呼び出し中のスピナー・ボタン無効化</td><td>二重送信・ユーザーが操作できているか不明</td></tr>
+        </table>
+      </div>
+      <div class="alert aw"><span class="ai">⚠️</span><span><strong>二重送信対策は必須。</strong>「登録」ボタンを押したあと、API完了まで再度押せないように <code class="inline">disabled</code> にする実装を忘れると同じデータが2件登録されるバグになる。現場でよく見落とされる。</span></div>
+    </div>
+​
+    <div class="card">
+      <h4>フロントエンドのバリデーション vs バックエンドのバリデーション</h4>
+      <p class="lead">「クライアント（ブラウザ）側でチェックするか・サーバー（API）側でチェックするか」の役割分担を理解する。</p>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>種別</th><th>実装場所</th><th>目的</th><th>例</th></tr>
+          <tr><td>フロントエンドバリデーション</td><td>TypeScript / React Hook Form等</td><td>UX向上・APIコール削減</td><td>必須チェック・桁数・形式チェック</td></tr>
+          <tr><td>バックエンドバリデーション</td><td>Spring Boot（@Valid）</td><td>セキュリティ・データ整合性の保証</td><td>必須・形式・業務ルール・DBチェック</td></tr>
+        </table>
+      </div>
+      <div class="alert ae"><span class="ai">🚫</span><span>フロントエンドのバリデーションは<strong>あくまでUX改善</strong>。「フロントでチェックしているからバックエンドは不要」は絶対にNG。APIは直接叩けるので、バックエンドのバリデーションは必ず実装する。</span></div>
+​
+      <div class="code"><span class="cm">// React Hook Form + zodでのフロントエンドバリデーション例</span>
+<span class="kw">import</span> { useForm } <span class="kw">from</span> <span class="st">'react-hook-form'</span>;
+<span class="kw">import</span> { z } <span class="kw">from</span> <span class="st">'zod'</span>;
+<span class="kw">import</span> { zodResolver } <span class="kw">from</span> <span class="st">'@hookform/resolvers/zod'</span>;
+​
+<span class="cm">// バリデーションスキーマ（設計書の項目定義から作る）</span>
+<span class="kw">const</span> schema = z.<span class="mt">object</span>({
+  name: z.<span class="mt">string</span>()
+    .<span class="mt">min</span>(<span class="vl">1</span>, <span class="st">'氏名は必須です'</span>)
+    .<span class="mt">max</span>(<span class="vl">50</span>, <span class="st">'氏名は50文字以内です'</span>),
+  email: z.<span class="mt">string</span>()
+    .<span class="mt">min</span>(<span class="vl">1</span>, <span class="st">'メールアドレスは必須です'</span>)
+    .<span class="mt">email</span>(<span class="st">'メールアドレスの形式が不正です'</span>),
+  age: z.<span class="mt">number</span>()
+    .<span class="mt">min</span>(<span class="vl">0</span>).<span class="mt">max</span>(<span class="vl">150</span>)
+    .<span class="mt">optional</span>(),
+});
+​
+<span class="kw">type</span> <span class="tp">UserFormValues</span> = z.<span class="mt">infer</span>&lt;<span class="kw">typeof</span> schema&gt;;
+​
+<span class="kw">const</span> <span class="tp">UserForm</span> = () =&gt; {
+  <span class="kw">const</span> { register, handleSubmit, formState: { errors, isSubmitting } }
+    = <span class="mt">useForm</span>&lt;<span class="tp">UserFormValues</span>&gt;({ resolver: <span class="mt">zodResolver</span>(schema) });
+​
+  <span class="kw">const</span> <span class="mt">onSubmit</span> = <span class="kw">async</span> (data: <span class="tp">UserFormValues</span>) =&gt; {
+    <span class="kw">await</span> <span class="mt">createUser</span>(data);
+  };
+​
+  <span class="kw">return</span> (
+    &lt;form onSubmit={<span class="mt">handleSubmit</span>(onSubmit)}&gt;
+      &lt;input {...<span class="mt">register</span>(<span class="st">'name'</span>)} /&gt;
+      {errors.name &amp;&amp; &lt;span&gt;{errors.name.message}&lt;/span&gt;}
+​
+      &lt;button type=<span class="st">"submit"</span> disabled={isSubmitting}&gt;   {<span class="cm">/* 送信中は無効化 */</span>}
+        {isSubmitting ? <span class="st">'送信中...'</span> : <span class="st">'登録'</span>}
+      &lt;/button&gt;
+    &lt;/form&gt;
+  );
+};</div>
+    </div>
+  </div>
+​
+  <!-- Day1 チェック -->
+  <div class="topic" id="d1-check">
+    <div class="topic-title"><span class="topic-icon">✅</span>Day 1 習得チェックリスト</div>
+    <div class="card">
+      <ul class="cklist">
+        <li><span class="chk" onclick="ck(this)"></span>詳細設計書の5要素（フロー・API仕様・バリデーション・エラーコード・テーブル定義）を説明できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>論理名と物理名の違いを説明でき、テーブル定義書と設計書を対応させられる</li>
+        <li><span class="chk" onclick="ck(this)"></span>feature ブランチを切って、rebase して、PR を出す一連の流れを手で実行できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>コンフリクトが起きたとき、どのファイルを見てどう解消するか説明できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>feat:/fix:/test: の使い分けができ、意味のあるコミットメッセージが書ける</li>
+        <li><span class="chk" onclick="ck(this)"></span>PRの5項目（概要・変更内容・背景・確認ポイント・チケット番号）が書ける</li>
+        <li><span class="chk" onclick="ck(this)"></span>tail -f でリアルタイムログ監視、grep -n でキーワード検索ができる</li>
+        <li><span class="chk" onclick="ck(this)"></span>lsof -i :8080 でポート使用確認、kill -9 でプロセス終了ができる</li>
+        <li><span class="chk" onclick="ck(this)"></span>コードレビューのコメントに対して適切な返信文が書ける</li>
+        <li><span class="chk" onclick="ck(this)"></span>画面設計書の5要素（画面ID・レイアウト・項目定義・イベント定義・画面遷移図）を説明できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>項目定義表からDTO・バリデーションを起こせる（I/D/Bの違いがわかる）</li>
+        <li><span class="chk" onclick="ck(this)"></span>イベント定義をAPIコールのTypeScript実装に落とし込める</li>
+        <li><span class="chk" onclick="ck(this)"></span>二重送信対策（ボタンのdisabled制御）の必要性を説明できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>フロントバリデーションとバックエンドバリデーションの役割の違いを説明できる</li>
+      </ul>
+    </div>
+  </div>
+</div>
+​
+<!-- ============================================================ DAY 2 -->
+<div id="d2" class="day-section d2">
+  <div class="sec-header">
+    <div class="sec-label">Day 2</div>
+    <h2>Java / Spring Boot 実装パターン完全版</h2>
+    <p>業務Webアプリの9割はこのパターンで動いている。「なぜそうなのか」の理解と「手が動く」を両方達成する。</p>
+  </div>
+​
+  <!-- ===== アーキテクチャ ===== -->
+  <div class="topic" id="d2-arch">
+    <div class="topic-title"><span class="topic-icon">🏗️</span>Spring Boot の基本構造と責務分担 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>3層アーキテクチャ（現場の業務アプリの標準構造）</h4>
+      <div class="code"><span class="cm">// パッケージ構成（これを最初に把握する）</span>
+com.example.app/
+  ├── controller/        <span class="cm">// ① HTTPリクエスト受付・レスポンス返却</span>
+  │   └── UserController.java
+  ├── service/           <span class="cm">// ② ビジネスロジック（ここに処理を書く）</span>
+  │   ├── UserService.java
+  │   └── impl/
+  │       └── UserServiceImpl.java
+  ├── repository/        <span class="cm">// ③ DB操作（MyBatis or JPA）</span>
+  │   └── UserRepository.java
+  ├── domain/            <span class="cm">// エンティティ・ドメインオブジェクト</span>
+  │   └── User.java
+  ├── dto/               <span class="cm">// APIのリクエスト・レスポンスクラス</span>
+  │   ├── request/
+  │   │   └── UserCreateRequest.java
+  │   └── response/
+  │       └── UserResponse.java
+  ├── exception/         <span class="cm">// 独自例外・例外ハンドラ</span>
+  │   ├── BusinessException.java
+  │   └── GlobalExceptionHandler.java
+  └── config/            <span class="cm">// 設定クラス（Security・CORS等）</span>
+      └── SecurityConfig.java</div>
+​
+      <div class="tbl-wrap" style="margin-top:16px;">
+        <table>
+          <tr><th>層</th><th>責務</th><th>書いてよいもの</th><th>書いてはいけないもの</th></tr>
+          <tr><td>Controller</td><td>HTTPの入出力</td><td>リクエスト受付・バリデーション呼び出し・レスポンス返却</td><td>ビジネスロジック・SQL・if文の業務判定</td></tr>
+          <tr><td>Service</td><td>業務処理</td><td>業務ルール・トランザクション制御・複数Repositoryの呼び出し</td><td>HTTPの知識（HttpServletRequest等）・SQL</td></tr>
+          <tr><td>Repository</td><td>DB操作</td><td>SQLの発行・結果のマッピング</td><td>業務ロジック・複雑な計算</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+​
+  <!-- ===== Controller ===== -->
+  <div class="topic" id="d2-controller">
+    <div class="topic-title"><span class="topic-icon">🎮</span>Controller 実装 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>標準的な Controller の書き方</h4>
+      <div class="code"><span class="an">@RestController</span>                          <span class="cm">// @Controller + @ResponseBody の合体</span>
+<span class="an">@RequestMapping</span>(<span class="st">"/api/users"</span>)            <span class="cm">// ベースパス</span>
+<span class="an">@RequiredArgsConstructor</span>                  <span class="cm">// Lombok：finalフィールドのコンストラクタを自動生成</span>
+<span class="an">@Slf4j</span>                                    <span class="cm">// Lombok：log変数が使えるようになる</span>
+<span class="kw">public class</span> <span class="tp">UserController</span> {
+​
+    <span class="kw">private final</span> <span class="tp">UserService</span> userService;  <span class="cm">// コンストラクタ注入（@Autowiredより推奨）</span>
+​
+    <span class="cm">// GET /api/users/{id} → ユーザー1件取得</span>
+    <span class="an">@GetMapping</span>(<span class="st">"/{id}"</span>)
+    <span class="kw">public</span> <span class="tp">ResponseEntity</span>&lt;<span class="tp">UserResponse</span>&gt; <span class="mt">getUser</span>(<span class="an">@PathVariable</span> <span class="tp">Long</span> <span class="pm">id</span>) {
+        log.info(<span class="st">"ユーザー取得 id={}"</span>, id);       <span class="cm">// {}でパラメータを埋め込む</span>
+        <span class="tp">UserResponse</span> response = userService.<span class="mt">findById</span>(id);
+        <span class="kw">return</span> ResponseEntity.<span class="mt">ok</span>(response);    <span class="cm">// 200 OK</span>
+    }
+​
+    <span class="cm">// GET /api/users?status=ACTIVE → 一覧取得</span>
+    <span class="an">@GetMapping</span>
+    <span class="kw">public</span> <span class="tp">ResponseEntity</span>&lt;<span class="tp">List</span>&lt;<span class="tp">UserResponse</span>&gt;&gt; <span class="mt">listUsers</span>(
+            <span class="an">@RequestParam</span>(required = <span class="vl">false</span>) <span class="tp">String</span> <span class="pm">status</span>) {   <span class="cm">// required=false で任意パラメータ</span>
+        <span class="kw">return</span> ResponseEntity.<span class="mt">ok</span>(userService.<span class="mt">findAll</span>(status));
+    }
+​
+    <span class="cm">// POST /api/users → ユーザー登録</span>
+    <span class="an">@PostMapping</span>
+    <span class="kw">public</span> <span class="tp">ResponseEntity</span>&lt;<span class="tp">UserResponse</span>&gt; <span class="mt">createUser</span>(
+            <span class="an">@RequestBody</span> <span class="an">@Valid</span> <span class="tp">UserCreateRequest</span> <span class="pm">request</span>) {   <span class="cm">// @Valid でバリデーション実行</span>
+        <span class="tp">UserResponse</span> response = userService.<span class="mt">create</span>(request);
+        <span class="kw">return</span> ResponseEntity
+                .<span class="mt">status</span>(HttpStatus.CREATED)  <span class="cm">// 201</span>
+                .<span class="mt">body</span>(response);
+    }
+​
+    <span class="cm">// PUT /api/users/{id} → ユーザー更新</span>
+    <span class="an">@PutMapping</span>(<span class="st">"/{id}"</span>)
+    <span class="kw">public</span> <span class="tp">ResponseEntity</span>&lt;<span class="tp">UserResponse</span>&gt; <span class="mt">updateUser</span>(
+            <span class="an">@PathVariable</span> <span class="tp">Long</span> <span class="pm">id</span>,
+            <span class="an">@RequestBody</span> <span class="an">@Valid</span> <span class="tp">UserUpdateRequest</span> <span class="pm">request</span>) {
+        <span class="tp">UserResponse</span> response = userService.<span class="mt">update</span>(id, request);
+        <span class="kw">return</span> ResponseEntity.<span class="mt">ok</span>(response);
+    }
+​
+    <span class="cm">// DELETE /api/users/{id} → ユーザー削除</span>
+    <span class="an">@DeleteMapping</span>(<span class="st">"/{id}"</span>)
+    <span class="kw">public</span> <span class="tp">ResponseEntity</span>&lt;<span class="tp">Void</span>&gt; <span class="mt">deleteUser</span>(<span class="an">@PathVariable</span> <span class="tp">Long</span> <span class="pm">id</span>) {
+        userService.<span class="mt">delete</span>(id);
+        <span class="kw">return</span> ResponseEntity.<span class="mt">noContent</span>().<span class="mt">build</span>();  <span class="cm">// 204 No Content</span>
+    }
+}</div>
+    </div>
+​
+    <div class="card">
+      <h4>アノテーション早見表（Controller層）</h4>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>アノテーション</th><th>意味・使い方</th></tr>
+          <tr><td>@PathVariable</td><td>/api/users/{id} の {id} を引数に受け取る</td></tr>
+          <tr><td>@RequestParam</td><td>?status=ACTIVE のクエリパラメータを受け取る</td></tr>
+          <tr><td>@RequestBody</td><td>リクエストボディのJSONをオブジェクトに変換（POSTで必須）</td></tr>
+          <tr><td>@RequestHeader</td><td>HTTPヘッダーの値を受け取る（Authorization等）</td></tr>
+          <tr><td>@Valid</td><td>@RequestBodyと組み合わせてバリデーションを実行する</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+​
+  <!-- ===== Service ===== -->
+  <div class="topic" id="d2-service">
+    <div class="topic-title"><span class="topic-icon">⚙️</span>Service 実装 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>Serviceの標準的な書き方</h4>
+      <div class="code"><span class="an">@Service</span>
+<span class="an">@RequiredArgsConstructor</span>
+<span class="an">@Slf4j</span>
+<span class="kw">public class</span> <span class="tp">UserService</span> {
+​
+    <span class="kw">private final</span> <span class="tp">UserRepository</span> userRepository;
+​
+    <span class="cm">// ---- 参照系：readOnly=true を必ずつける ----</span>
+    <span class="an">@Transactional</span>(readOnly = <span class="vl">true</span>)
+    <span class="kw">public</span> <span class="tp">UserResponse</span> <span class="mt">findById</span>(<span class="tp">Long</span> <span class="pm">id</span>) {
+        <span class="kw">return</span> userRepository.<span class="mt">findById</span>(id)
+            .<span class="mt">map</span>(<span class="kw">this</span>::<span class="mt">toResponse</span>)
+            .<span class="mt">orElseThrow</span>(() -&gt; <span class="kw">new</span> <span class="tp">ResourceNotFoundException</span>(<span class="st">"User"</span>, id));
+    }
+​
+    <span class="an">@Transactional</span>(readOnly = <span class="vl">true</span>)
+    <span class="kw">public</span> <span class="tp">List</span>&lt;<span class="tp">UserResponse</span>&gt; <span class="mt">findAll</span>(<span class="tp">String</span> <span class="pm">status</span>) {
+        <span class="kw">return</span> userRepository.<span class="mt">findByStatus</span>(status)
+            .<span class="mt">stream</span>()
+            .<span class="mt">map</span>(<span class="kw">this</span>::<span class="mt">toResponse</span>)
+            .<span class="mt">collect</span>(Collectors.<span class="mt">toList</span>());
+    }
+​
+    <span class="cm">// ---- 更新系：@Transactional（readOnly省略 = false）----</span>
+    <span class="an">@Transactional</span>
+    <span class="kw">public</span> <span class="tp">UserResponse</span> <span class="mt">create</span>(<span class="tp">UserCreateRequest</span> <span class="pm">request</span>) {
+        <span class="cm">// ① 業務バリデーション（DBチェックが必要なもの）</span>
+        <span class="kw">if</span> (userRepository.<span class="mt">existsByEmail</span>(request.<span class="mt">getEmail</span>())) {
+            <span class="kw">throw new</span> <span class="tp">BusinessException</span>(<span class="st">"ERR_001"</span>, <span class="st">"メールアドレスが既に存在します"</span>);
+        }
+​
+        <span class="cm">// ② エンティティに変換して保存</span>
+        <span class="tp">User</span> user = <span class="tp">User</span>.<span class="mt">builder</span>()
+            .<span class="mt">name</span>(request.<span class="mt">getName</span>())
+            .<span class="mt">email</span>(request.<span class="mt">getEmail</span>())
+            .<span class="mt">status</span>(<span class="tp">UserStatus</span>.ACTIVE)
+            .<span class="mt">build</span>();
+        <span class="tp">User</span> saved = userRepository.<span class="mt">save</span>(user);
+​
+        log.info(<span class="st">"ユーザー登録完了 userId={}"</span>, saved.<span class="mt">getId</span>());
+        <span class="kw">return</span> <span class="mt">toResponse</span>(saved);
+    }
+​
+    <span class="an">@Transactional</span>
+    <span class="kw">public</span> <span class="kw">void</span> <span class="mt">delete</span>(<span class="tp">Long</span> <span class="pm">id</span>) {
+        <span class="tp">User</span> user = userRepository.<span class="mt">findById</span>(id)
+            .<span class="mt">orElseThrow</span>(() -&gt; <span class="kw">new</span> <span class="tp">ResourceNotFoundException</span>(<span class="st">"User"</span>, id));
+        user.<span class="mt">setDelFlg</span>(<span class="vl">true</span>);   <span class="cm">// 物理削除ではなく論理削除</span>
+        userRepository.<span class="mt">save</span>(user);
+    }
+​
+    <span class="cm">// エンティティ→レスポンスの変換（private メソッドに切り出す）</span>
+    <span class="kw">private</span> <span class="tp">UserResponse</span> <span class="mt">toResponse</span>(<span class="tp">User</span> <span class="pm">user</span>) {
+        <span class="kw">return</span> <span class="tp">UserResponse</span>.<span class="mt">builder</span>()
+            .<span class="mt">userId</span>(user.<span class="mt">getId</span>())
+            .<span class="mt">name</span>(user.<span class="mt">getName</span>())
+            .<span class="mt">email</span>(user.<span class="mt">getEmail</span>())
+            .<span class="mt">build</span>();
+    }
+}</div>
+​
+      <div class="alert aw"><span class="ai">⚠️</span><span><strong>@Transactional の readOnly=true を忘れずに。</strong>SELECT系メソッドに readOnly=true をつけることでパフォーマンスが上がり、「読み取り専用のはずなのに更新してしまった」バグも防げる。</span></div>
+    </div>
+  </div>
+​
+  <!-- ===== Repository ===== -->
+  <div class="topic" id="d2-repo">
+    <div class="topic-title"><span class="topic-icon">🗃️</span>Repository / DB操作 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>MyBatis（業務系で最もよく使われる）</h4>
+      <div class="code"><span class="cm">// Mapper インターフェース</span>
+<span class="an">@Mapper</span>
+<span class="kw">public interface</span> <span class="tp">UserMapper</span> {
+    <span class="tp">Optional</span>&lt;<span class="tp">User</span>&gt; <span class="mt">findById</span>(<span class="an">@Param</span>(<span class="st">"id"</span>) <span class="tp">Long</span> <span class="pm">id</span>);
+    <span class="tp">List</span>&lt;<span class="tp">User</span>&gt; <span class="mt">findAll</span>();
+    <span class="tp">List</span>&lt;<span class="tp">User</span>&gt; <span class="mt">findByCondition</span>(<span class="tp">UserSearchCondition</span> <span class="pm">condition</span>);
+    <span class="kw">int</span> <span class="mt">insert</span>(<span class="tp">User</span> <span class="pm">user</span>);   <span class="cm">// 戻り値は更新件数</span>
+    <span class="kw">int</span> <span class="mt">update</span>(<span class="tp">User</span> <span class="pm">user</span>);
+    <span class="kw">boolean</span> <span class="mt">existsByEmail</span>(<span class="an">@Param</span>(<span class="st">"email"</span>) <span class="tp">String</span> <span class="pm">email</span>);
+}</div>
+​
+      <div class="code"><span class="cm">&lt;!-- UserMapper.xml（SQLはここに書く） --&gt;</span>
+&lt;mapper namespace="com.example.repository.UserMapper"&gt;
+​
+  &lt;resultMap id="userResultMap" type="User"&gt;
+    &lt;id property="id" column="user_id"/&gt;
+    &lt;result property="name" column="name"/&gt;
+    &lt;result property="email" column="email"/&gt;
+    &lt;result property="delFlg" column="del_flg"/&gt;   <span class="cm">&lt;!-- 物理名→論理名のマッピング --&gt;</span>
+    &lt;result property="createdAt" column="created_at"/&gt;
+  &lt;/resultMap&gt;
+​
+  &lt;select id="findById" resultMap="userResultMap"&gt;
+    SELECT user_id, name, email, del_flg, created_at
+    FROM users
+    WHERE user_id = #{id}
+      AND del_flg = 0   <span class="cm">&lt;!-- 論理削除チェック：忘れると削除済みも取れる --&gt;</span>
+  &lt;/select&gt;
+​
+  <span class="cm">&lt;!-- 動的SQL：条件が不定の検索 --&gt;</span>
+  &lt;select id="findByCondition" resultMap="userResultMap"&gt;
+    SELECT user_id, name, email, del_flg, created_at
+    FROM users
+    &lt;where&gt;
+      &lt;if test="name != null and name != ''"&gt;
+        AND name LIKE #{name} || '%'   <span class="cm">&lt;!-- 前方一致 --&gt;</span>
+      &lt;/if&gt;
+      &lt;if test="status != null"&gt;
+        AND status = #{status}
+      &lt;/if&gt;
+      AND del_flg = 0
+    &lt;/where&gt;
+    ORDER BY created_at DESC
+  &lt;/select&gt;
+​
+  &lt;insert id="insert" useGeneratedKeys="true" keyProperty="id"&gt;
+    INSERT INTO users (name, email, created_at, updated_at, del_flg)
+    VALUES (#{name}, #{email}, NOW(), NOW(), 0)
+  &lt;/insert&gt;
+​
+&lt;/mapper&gt;</div>
+    </div>
+​
+    <div class="card">
+      <h4>JPA / Spring Data JPA（モダンな現場で多い）</h4>
+      <div class="code"><span class="cm">// エンティティクラス</span>
+<span class="an">@Entity</span>
+<span class="an">@Table</span>(name = <span class="st">"users"</span>)
+<span class="an">@Data</span>
+<span class="an">@Builder</span>
+<span class="an">@NoArgsConstructor</span>
+<span class="an">@AllArgsConstructor</span>
+<span class="kw">public class</span> <span class="tp">User</span> {
+​
+    <span class="an">@Id</span>
+    <span class="an">@GeneratedValue</span>(strategy = GenerationType.IDENTITY)
+    <span class="kw">private</span> <span class="tp">Long</span> id;
+​
+    <span class="an">@Column</span>(nullable = <span class="vl">false</span>, length = <span class="vl">50</span>)
+    <span class="kw">private</span> <span class="tp">String</span> name;
+​
+    <span class="an">@Column</span>(nullable = <span class="vl">false</span>, unique = <span class="vl">true</span>)
+    <span class="kw">private</span> <span class="tp">String</span> email;
+​
+    <span class="an">@Enumerated</span>(EnumType.STRING)
+    <span class="kw">private</span> <span class="tp">UserStatus</span> status;
+​
+    <span class="an">@Column</span>(name = <span class="st">"del_flg"</span>)
+    <span class="kw">private</span> <span class="tp">boolean</span> delFlg = <span class="vl">false</span>;
+​
+    <span class="an">@CreationTimestamp</span>                       <span class="cm">// INSERT時に自動設定</span>
+    <span class="kw">private</span> <span class="tp">LocalDateTime</span> createdAt;
+​
+    <span class="an">@UpdateTimestamp</span>                         <span class="cm">// UPDATE時に自動更新</span>
+    <span class="kw">private</span> <span class="tp">LocalDateTime</span> updatedAt;
+}
+​
+<span class="cm">// Repository インターフェース（実装はSpringが自動生成）</span>
+<span class="kw">public interface</span> <span class="tp">UserRepository</span> <span class="kw">extends</span> <span class="tp">JpaRepository</span>&lt;<span class="tp">User</span>, <span class="tp">Long</span>&gt; {
+​
+    <span class="cm">// メソッド名でSQLが自動生成される</span>
+    <span class="tp">Optional</span>&lt;<span class="tp">User</span>&gt; <span class="mt">findByEmailAndDelFlgFalse</span>(<span class="tp">String</span> <span class="pm">email</span>);
+    <span class="tp">List</span>&lt;<span class="tp">User</span>&gt; <span class="mt">findByStatusAndDelFlgFalseOrderByCreatedAtDesc</span>(<span class="tp">UserStatus</span> <span class="pm">status</span>);
+    <span class="kw">boolean</span> <span class="mt">existsByEmailAndDelFlgFalse</span>(<span class="tp">String</span> <span class="pm">email</span>);
+​
+    <span class="cm">// 複雑なSQLは@Queryで書く</span>
+    <span class="an">@Query</span>(<span class="st">"SELECT u FROM User u WHERE u.name LIKE :name% AND u.delFlg = false"</span>)
+    <span class="tp">List</span>&lt;<span class="tp">User</span>&gt; <span class="mt">findByNameStartingWith</span>(<span class="an">@Param</span>(<span class="st">"name"</span>) <span class="tp">String</span> <span class="pm">name</span>);
+}</div>
+    </div>
+  </div>
+​
+  <!-- ===== バリデーション ===== -->
+  <div class="topic" id="d2-valid">
+    <div class="topic-title"><span class="topic-icon">✅</span>バリデーション実装 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>リクエストDTOのバリデーション</h4>
+      <div class="code"><span class="an">@Data</span>
+<span class="kw">public class</span> <span class="tp">UserCreateRequest</span> {
+​
+    <span class="an">@NotBlank</span>(message = <span class="st">"ユーザー名は必須です"</span>)         <span class="cm">// null・空文字・空白のみNG</span>
+    <span class="an">@Size</span>(max = <span class="vl">50</span>, message = <span class="st">"ユーザー名は50文字以内です"</span>)
+    <span class="kw">private</span> <span class="tp">String</span> name;
+​
+    <span class="an">@NotBlank</span>(message = <span class="st">"メールアドレスは必須です"</span>)
+    <span class="an">@Email</span>(message = <span class="st">"メールアドレスの形式が不正です"</span>)
+    <span class="an">@Size</span>(max = <span class="vl">255</span>)
+    <span class="kw">private</span> <span class="tp">String</span> email;
+​
+    <span class="an">@NotNull</span>(message = <span class="st">"年齢は必須です"</span>)              <span class="cm">// null のみNG（0はOK）</span>
+    <span class="an">@Min</span>(value = <span class="vl">0</span>, message = <span class="st">"年齢は0以上です"</span>)
+    <span class="an">@Max</span>(value = <span class="vl">150</span>, message = <span class="st">"年齢は150以下です"</span>)
+    <span class="kw">private</span> <span class="tp">Integer</span> age;
+​
+    <span class="an">@Pattern</span>(regexp = <span class="st">"^0[0-9]{9,10}$"</span>, message = <span class="st">"電話番号の形式が不正です"</span>)
+    <span class="kw">private</span> <span class="tp">String</span> phone;                             <span class="cm">// null許可（@NotBlankなし）</span>
+​
+    <span class="an">@NotNull</span>
+    <span class="kw">private</span> <span class="tp">Long</span> departmentId;
+}</div>
+​
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <tr><th>アノテーション</th><th>OKな値</th><th>NGな値</th><th>用途</th></tr>
+          <tr><td>@NotNull</td><td>""（空文字）、0</td><td>null のみ</td><td>Integer・Long等のnullチェック</td></tr>
+          <tr><td>@NotEmpty</td><td>"a"</td><td>null・""</td><td>空文字もNG（リストにも使える）</td></tr>
+          <tr><td>@NotBlank</td><td>"a"、"あ"</td><td>null・""・" "</td><td>文字列の必須チェック（これが一番多い）</td></tr>
+        </table>
+      </div>
+      <div class="alert aw"><span class="ai">⚠️</span><span>@NotNull と @NotBlank は別物。String型に @NotNull を使うと空文字 "" がスルーしてしまう。String には基本的に @NotBlank を使う。</span></div>
+    </div>
+  </div>
+​
+  <!-- ===== 例外 ===== -->
+  <div class="topic" id="d2-ex">
+    <div class="topic-title"><span class="topic-icon">🚨</span>例外ハンドリング <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>独自例外クラスとグローバルハンドラ</h4>
+      <div class="code"><span class="cm">// 業務エラー（リトライしても意味のないエラー）</span>
+<span class="an">@Getter</span>
+<span class="kw">public class</span> <span class="tp">BusinessException</span> <span class="kw">extends</span> <span class="tp">RuntimeException</span> {
+    <span class="kw">private final</span> <span class="tp">String</span> errorCode;
+​
+    <span class="kw">public</span> <span class="tp">BusinessException</span>(<span class="tp">String</span> <span class="pm">errorCode</span>, <span class="tp">String</span> <span class="pm">message</span>) {
+        <span class="kw">super</span>(message);
+        <span class="kw">this</span>.errorCode = errorCode;
+    }
+}
+​
+<span class="cm">// リソース未発見（404）専用</span>
+<span class="kw">public class</span> <span class="tp">ResourceNotFoundException</span> <span class="kw">extends</span> <span class="tp">RuntimeException</span> {
+    <span class="kw">public</span> <span class="tp">ResourceNotFoundException</span>(<span class="tp">String</span> <span class="pm">resource</span>, <span class="tp">Object</span> <span class="pm">id</span>) {
+        <span class="kw">super</span>(resource + <span class="st">" が見つかりません: id="</span> + id);
+    }
+}
+​
+<span class="cm">// グローバル例外ハンドラ（全Controllerに適用）</span>
+<span class="an">@RestControllerAdvice</span>
+<span class="an">@Slf4j</span>
+<span class="kw">public class</span> <span class="tp">GlobalExceptionHandler</span> {
+​
+    <span class="cm">// バリデーションエラー → 400</span>
+    <span class="an">@ExceptionHandler</span>(<span class="tp">MethodArgumentNotValidException</span>.<span class="kw">class</span>)
+    <span class="an">@ResponseStatus</span>(HttpStatus.BAD_REQUEST)
+    <span class="kw">public</span> <span class="tp">ErrorResponse</span> <span class="mt">handleValidation</span>(<span class="tp">MethodArgumentNotValidException</span> <span class="pm">ex</span>) {
+        <span class="tp">List</span>&lt;<span class="tp">String</span>&gt; errors = ex.<span class="mt">getBindingResult</span>().<span class="mt">getFieldErrors</span>().stream()
+            .<span class="mt">map</span>(e -&gt; e.<span class="mt">getField</span>() + <span class="st">": "</span> + e.<span class="mt">getDefaultMessage</span>())
+            .<span class="mt">collect</span>(Collectors.<span class="mt">toList</span>());
+        <span class="kw">return</span> <span class="kw">new</span> <span class="tp">ErrorResponse</span>(<span class="st">"ERR_VALIDATION"</span>, <span class="st">"入力値が不正です"</span>, errors);
+    }
+​
+    <span class="cm">// 業務エラー → 409</span>
+    <span class="an">@ExceptionHandler</span>(<span class="tp">BusinessException</span>.<span class="kw">class</span>)
+    <span class="an">@ResponseStatus</span>(HttpStatus.CONFLICT)
+    <span class="kw">public</span> <span class="tp">ErrorResponse</span> <span class="mt">handleBusiness</span>(<span class="tp">BusinessException</span> <span class="pm">ex</span>) {
+        log.warn(<span class="st">"業務エラー: {} {}"</span>, ex.<span class="mt">getErrorCode</span>(), ex.<span class="mt">getMessage</span>());
+        <span class="kw">return</span> <span class="kw">new</span> <span class="tp">ErrorResponse</span>(ex.<span class="mt">getErrorCode</span>(), ex.<span class="mt">getMessage</span>(), null);
+    }
+​
+    <span class="cm">// リソース未発見 → 404</span>
+    <span class="an">@ExceptionHandler</span>(<span class="tp">ResourceNotFoundException</span>.<span class="kw">class</span>)
+    <span class="an">@ResponseStatus</span>(HttpStatus.NOT_FOUND)
+    <span class="kw">public</span> <span class="tp">ErrorResponse</span> <span class="mt">handleNotFound</span>(<span class="tp">ResourceNotFoundException</span> <span class="pm">ex</span>) {
+        <span class="kw">return</span> <span class="kw">new</span> <span class="tp">ErrorResponse</span>(<span class="st">"ERR_NOT_FOUND"</span>, ex.<span class="mt">getMessage</span>(), null);
+    }
+​
+    <span class="cm">// 想定外のエラー → 500</span>
+    <span class="an">@ExceptionHandler</span>(<span class="tp">Exception</span>.<span class="kw">class</span>)
+    <span class="an">@ResponseStatus</span>(HttpStatus.INTERNAL_SERVER_ERROR)
+    <span class="kw">public</span> <span class="tp">ErrorResponse</span> <span class="mt">handleUnexpected</span>(<span class="tp">Exception</span> <span class="pm">ex</span>) {
+        log.error(<span class="st">"システムエラー"</span>, ex);   <span class="cm">// スタックトレースごとログ出力</span>
+        <span class="kw">return</span> <span class="kw">new</span> <span class="tp">ErrorResponse</span>(<span class="st">"ERR_999"</span>, <span class="st">"システムエラーが発生しました"</span>, null);
+    }
+}</div>
+    </div>
+  </div>
+​
+  <!-- ===== Lombok ===== -->
+  <div class="topic" id="d2-lombok">
+    <div class="topic-title"><span class="topic-icon">🔧</span>Lombok アノテーション早見表 <span class="tag tp2">重要</span></div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>アノテーション</th><th>生成されるコード</th><th>主な使用場所</th></tr>
+          <tr><td>@Getter</td><td>全フィールドのgetter</td><td>エンティティ・DTO</td></tr>
+          <tr><td>@Setter</td><td>全フィールドのsetter</td><td>エンティティ（更新系）</td></tr>
+          <tr><td>@Data</td><td>@Getter + @Setter + @ToString + @EqualsAndHashCode</td><td>DTO・エンティティ全般</td></tr>
+          <tr><td>@Builder</td><td>ビルダーパターン（User.builder().name("xxx").build()）</td><td>テストデータ作成・DTO生成</td></tr>
+          <tr><td>@NoArgsConstructor</td><td>引数なしコンストラクタ</td><td>JPAエンティティ（必須）</td></tr>
+          <tr><td>@AllArgsConstructor</td><td>全フィールドのコンストラクタ</td><td>@Builderと組み合わせ</td></tr>
+          <tr><td>@RequiredArgsConstructor</td><td>finalフィールドのコンストラクタ</td><td>Controller・Service（DI用）</td></tr>
+          <tr><td>@Slf4j</td><td>private static final Logger log = ...</td><td>ログを出力する全クラス</td></tr>
+          <tr><td>@Value</td><td>全フィールドfinal化・getter生成（immutable）</td><td>変更不要なDTO</td></tr>
+        </table>
+      </div>
+      <div class="alert aw" style="margin-top:12px;"><span class="ai">⚠️</span><span>@Data は便利だが、JPAエンティティに使うと @EqualsAndHashCode が循環参照を引き起こすことがある。エンティティには @Getter @Setter だけ使うのが安全。</span></div>
+    </div>
+  </div>
+​
+  <!-- ===== TypeScript ===== -->
+  <div class="topic" id="d2-ts">
+    <div class="topic-title"><span class="topic-icon">📜</span>TypeScript / フロントエンド連携 <span class="tag tp2">重要</span></div>
+​
+    <div class="card">
+      <h4>Spring Boot の API を TypeScript から呼ぶ基本パターン</h4>
+      <div class="code"><span class="cm">// 型定義（APIのレスポンスと合わせる）</span>
+<span class="kw">interface</span> <span class="tp">UserResponse</span> {
+  userId: <span class="tp">number</span>;
+  name: <span class="tp">string</span>;
+  email: <span class="tp">string</span>;
+  createdAt: <span class="tp">string</span>;  <span class="cm">// Java の LocalDateTime は文字列で来る</span>
+}
+​
+<span class="kw">interface</span> <span class="tp">UserCreateRequest</span> {
+  name: <span class="tp">string</span>;
+  email: <span class="tp">string</span>;
+  age: <span class="tp">number</span>;
+}
+​
+<span class="kw">interface</span> <span class="tp">ErrorResponse</span> {
+  errorCode: <span class="tp">string</span>;
+  message: <span class="tp">string</span>;
+  errors: <span class="tp">string</span>[] | <span class="kw">null</span>;
+}
+​
+<span class="cm">// API呼び出し関数（async/await）</span>
+<span class="kw">const</span> <span class="mt">createUser</span> = <span class="kw">async</span> (data: <span class="tp">UserCreateRequest</span>): <span class="tp">Promise</span>&lt;<span class="tp">UserResponse</span>&gt; =&gt; {
+  <span class="kw">const</span> response = <span class="kw">await</span> <span class="mt">fetch</span>(<span class="st">'/api/users'</span>, {
+    method: <span class="st">'POST'</span>,
+    headers: { <span class="st">'Content-Type'</span>: <span class="st">'application/json'</span> },
+    body: <span class="tp">JSON</span>.<span class="mt">stringify</span>(data),
+  });
+​
+  <span class="kw">if</span> (!response.ok) {
+    <span class="kw">const</span> error: <span class="tp">ErrorResponse</span> = <span class="kw">await</span> response.<span class="mt">json</span>();
+    <span class="kw">throw new</span> <span class="tp">Error</span>(error.message);   <span class="cm">// エラーは上位でキャッチ</span>
+  }
+​
+  <span class="kw">return</span> response.<span class="mt">json</span>() <span class="kw">as</span> <span class="tp">Promise</span>&lt;<span class="tp">UserResponse</span>&gt;;
+};
+​
+<span class="cm">// 使い方</span>
+<span class="kw">try</span> {
+  <span class="kw">const</span> user = <span class="kw">await</span> <span class="mt">createUser</span>({ name: <span class="st">'田中太郎'</span>, email: <span class="st">'tanaka@example.com'</span>, age: <span class="vl">30</span> });
+  console.<span class="mt">log</span>(<span class="st">'登録成功'</span>, user.userId);
+} <span class="kw">catch</span> (e) {
+  console.<span class="mt">error</span>(<span class="st">'エラー'</span>, e);
+}</div>
+​
+      <div class="alert ai-info"><span class="ai">💡</span><span>JavaのLong型はJSONでは数値で来るがJavaScriptのnumberは精度が落ちることがある（2^53以上の値）。IDが大きい場合は文字列で返す設計になっていることも。設計書を確認。</span></div>
+    </div>
+  </div>
+​
+  <!-- Day2 チェック -->
+  <div class="topic" id="d2-check">
+    <div class="topic-title"><span class="topic-icon">✅</span>Day 2 習得チェックリスト</div>
+    <div class="card">
+      <ul class="cklist">
+        <li><span class="chk" onclick="ck(this)"></span>Controller/Service/Repositoryの役割分担を説明でき、どこに何を書くか判断できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>@Transactional の readOnly=true とそうでない場合の使い分けが説明できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>@NotNull/@NotEmpty/@NotBlankの違いを説明できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>MyBatis の動的SQL（&lt;if test="..."&gt;）が書ける</li>
+        <li><span class="chk" onclick="ck(this)"></span>del_flg=0 の条件を WHERE句に忘れずに書けることを理解している</li>
+        <li><span class="chk" onclick="ck(this)"></span>独自例外クラスと @ExceptionHandler でエラーハンドリングができる</li>
+        <li><span class="chk" onclick="ck(this)"></span>@RequiredArgsConstructor でコンストラクタ注入を使いこなせる</li>
+        <li><span class="chk" onclick="ck(this)"></span>TypeScriptからSpring BootのAPIを fetch で呼び出すコードが書ける</li>
+      </ul>
+    </div>
+  </div>
+</div>
+​
+<!-- ============================================================ DAY 3 -->
+<div id="d3" class="day-section d3">
+  <div class="sec-header">
+    <div class="sec-label">Day 3</div>
+    <h2>結合テスト完全攻略</h2>
+    <p>「テストが書ける人」は現場での評価が段違いに上がる。テストの書き方だけでなく「何をテストすべきか」の考え方を体得する。</p>
+  </div>
+​
+  <!-- ===== テスト種別 ===== -->
+  <div class="topic" id="d3-types">
+    <div class="topic-title"><span class="topic-icon">🧪</span>テスト種別の全体像 <span class="tag tm">MUST</span></div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>種別</th><th>略称</th><th>テスト対象</th><th>使うツール</th><th>担当</th></tr>
+          <tr><td>単体テスト</td><td>UT</td><td>クラス1つ単位</td><td>JUnit5 + Mockito</td><td>実装担当者</td></tr>
+          <tr><td>結合テスト</td><td>IT</td><td>Controller〜DBまで通す</td><td>@SpringBootTest / @WebMvcTest</td><td>実装担当者</td></tr>
+          <tr><td>システムテスト</td><td>ST</td><td>機能・業務フロー全体</td><td>手動 / Selenium / Playwright</td><td>テスト担当者</td></tr>
+          <tr><td>受入テスト</td><td>UAT</td><td>業務要件を満たすか</td><td>手動</td><td>顧客・QA</td></tr>
+        </table>
+      </div>
+      <div class="alert ai-info"><span class="ai">💡</span><span>現場で「結合テスト」と言う場合、Controller〜DB（もしくはモック）まで通す IT を指すことが多い。文脈によって意味が変わるので、入場初日に「このプロジェクトの結合テストはどこまでの範囲を指しますか？」と確認しておくと安心。</span></div>
+    </div>
+  </div>
+​
+  <!-- ===== JUnit5 ===== -->
+  <div class="topic" id="d3-junit">
+    <div class="topic-title"><span class="topic-icon">⚙️</span>JUnit5 基礎 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>テストクラスの基本構造</h4>
+      <div class="code"><span class="an">@ExtendWith</span>(MockitoExtension.<span class="kw">class</span>)   <span class="cm">// JUnit5 + Mockito の組み合わせ</span>
+<span class="kw">class</span> <span class="tp">UserServiceTest</span> {
+​
+    <span class="an">@InjectMocks</span>
+    <span class="kw">private</span> <span class="tp">UserService</span> userService;    <span class="cm">// テスト対象クラス</span>
+​
+    <span class="an">@Mock</span>
+    <span class="kw">private</span> <span class="tp">UserRepository</span> userRepository;  <span class="cm">// モック（偽物のDB）</span>
+​
+    <span class="an">@BeforeEach</span>   <span class="cm">// 各テストの前に実行</span>
+    <span class="kw">void</span> <span class="mt">setUp</span>() {
+        <span class="cm">// テスト前の共通初期化処理（DBのリセット等）</span>
+    }
+​
+    <span class="an">@AfterEach</span>    <span class="cm">// 各テストの後に実行</span>
+    <span class="kw">void</span> <span class="mt">tearDown</span>() {
+        <span class="cm">// テスト後のクリーンアップ</span>
+    }
+​
+    <span class="an">@Test</span>
+    <span class="an">@DisplayName</span>(<span class="st">"正常系：ユーザーが存在する場合、ユーザー情報を返す"</span>)
+    <span class="kw">void</span> <span class="mt">findById_正常系_存在するID</span>() {
+        <span class="cm">// テストコード（後述）</span>
+    }
+​
+    <span class="an">@ParameterizedTest</span>   <span class="cm">// 複数パターンをまとめて実行</span>
+    <span class="an">@ValueSource</span>(strings = {<span class="st">""</span>, <span class="st">" "</span>, <span class="st">"　"</span>})   <span class="cm">// 空・スペース・全角スペース</span>
+    <span class="an">@DisplayName</span>(<span class="st">"異常系：空白の名前は登録できない"</span>)
+    <span class="kw">void</span> <span class="mt">create_異常系_空白の名前</span>(<span class="tp">String</span> <span class="pm">name</span>) {
+        <span class="cm">// パラメータが変わるだけで同じテストを繰り返せる</span>
+    }
+}</div>
+    </div>
+​
+    <div class="card">
+      <h4>AssertJ のアサーション（JUnit5の標準）</h4>
+      <div class="code"><span class="cm">// 値の比較</span>
+assertThat(result.getName()).<span class="mt">isEqualTo</span>(<span class="st">"田中太郎"</span>);
+assertThat(result.getAge()).<span class="mt">isGreaterThan</span>(<span class="vl">0</span>);
+assertThat(result.getAge()).<span class="mt">isBetween</span>(<span class="vl">0</span>, <span class="vl">150</span>);
+​
+<span class="cm">// null チェック</span>
+assertThat(result).<span class="mt">isNotNull</span>();
+assertThat(result.getPhone()).<span class="mt">isNull</span>();
+​
+<span class="cm">// リストの検証</span>
+assertThat(result).<span class="mt">hasSize</span>(<span class="vl">3</span>);
+assertThat(result).<span class="mt">isNotEmpty</span>();
+assertThat(result).<span class="mt">contains</span>(item1, item2);
+assertThat(result).<span class="mt">extracting</span>(<span class="st">"name"</span>).<span class="mt">containsExactly</span>(<span class="st">"Aさん"</span>, <span class="st">"Bさん"</span>);
+​
+<span class="cm">// 文字列チェック</span>
+assertThat(result.getMessage()).<span class="mt">contains</span>(<span class="st">"エラー"</span>);
+assertThat(result.getEmail()).<span class="mt">startsWith</span>(<span class="st">"tanaka"</span>);
+assertThat(result.getEmail()).<span class="mt">endsWith</span>(<span class="st">".com"</span>);
+​
+<span class="cm">// 例外の検証</span>
+assertThatThrownBy(() -&gt; userService.<span class="mt">findById</span>(<span class="vl">999L</span>))
+    .<span class="mt">isInstanceOf</span>(<span class="tp">ResourceNotFoundException</span>.<span class="kw">class</span>)
+    .<span class="mt">hasMessageContaining</span>(<span class="st">"User"</span>);
+​
+<span class="cm">// 例外が投げられないことを確認</span>
+assertThatCode(() -&gt; userService.<span class="mt">create</span>(validRequest))
+    .<span class="mt">doesNotThrowAnyException</span>();</div>
+    </div>
+  </div>
+​
+  <!-- ===== Mockito ===== -->
+  <div class="topic" id="d3-mock">
+    <div class="topic-title"><span class="topic-icon">🎭</span>Mockito 完全版 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>Mockitoの基本パターン全集</h4>
+      <div class="code"><span class="cm">// ① 返り値を設定する（when/thenReturn）</span>
+<span class="tp">User</span> mockUser = <span class="tp">User</span>.<span class="mt">builder</span>().id(<span class="vl">1L</span>).name(<span class="st">"田中太郎"</span>).email(<span class="st">"t@example.com"</span>).<span class="mt">build</span>();
+when(userRepository.<span class="mt">findById</span>(<span class="vl">1L</span>)).<span class="mt">thenReturn</span>(Optional.<span class="mt">of</span>(mockUser));
+when(userRepository.<span class="mt">findById</span>(<span class="vl">999L</span>)).<span class="mt">thenReturn</span>(Optional.<span class="mt">empty</span>());  <span class="cm">// 未発見</span>
+when(userRepository.<span class="mt">findAll</span>()).<span class="mt">thenReturn</span>(List.<span class="mt">of</span>(mockUser));
+​
+<span class="cm">// ② 任意の引数にマッチ</span>
+when(userRepository.<span class="mt">existsByEmail</span>(anyString())).<span class="mt">thenReturn</span>(<span class="vl">false</span>);
+when(userRepository.<span class="mt">findById</span>(anyLong())).<span class="mt">thenReturn</span>(Optional.<span class="mt">of</span>(mockUser));
+​
+<span class="cm">// ③ 例外を投げさせる</span>
+when(userRepository.<span class="mt">save</span>(any())).<span class="mt">thenThrow</span>(<span class="kw">new</span> <span class="tp">DataAccessException</span>(<span class="st">"DB Error"</span>){});
+​
+<span class="cm">// ④ 呼び出し回数を検証（verify）</span>
+verify(userRepository, times(<span class="vl">1</span>)).<span class="mt">save</span>(any());     <span class="cm">// 1回呼ばれたか</span>
+verify(userRepository, never()).<span class="mt">delete</span>(any());   <span class="cm">// 呼ばれていないか</span>
+verify(userRepository, atLeast(<span class="vl">1</span>)).<span class="mt">findById</span>(anyLong());
+​
+<span class="cm">// ⑤ 引数のキャプチャ（save()に渡されたオブジェクトを検証）</span>
+<span class="tp">ArgumentCaptor</span>&lt;<span class="tp">User</span>&gt; captor = ArgumentCaptor.<span class="mt">forClass</span>(<span class="tp">User</span>.<span class="kw">class</span>);
+verify(userRepository).<span class="mt">save</span>(captor.<span class="mt">capture</span>());
+<span class="tp">User</span> savedUser = captor.<span class="mt">getValue</span>();
+assertThat(savedUser.getName()).<span class="mt">isEqualTo</span>(<span class="st">"田中太郎"</span>);
+assertThat(savedUser.getDelFlg()).<span class="mt">isFalse</span>();   <span class="cm">// 削除フラグが立っていないか確認</span>
+​
+<span class="cm">// ⑥ void メソッドのモック（doNothing / doThrow）</span>
+doNothing().when(userRepository).<span class="mt">deleteById</span>(anyLong());
+doThrow(<span class="kw">new</span> <span class="tp">RuntimeException</span>(<span class="st">"error"</span>)).when(userRepository).<span class="mt">deleteById</span>(<span class="vl">999L</span>);</div>
+    </div>
+​
+    <div class="card">
+      <h4>テストの全体像（正常系・異常系セット）</h4>
+      <div class="code"><span class="an">@Test</span>
+<span class="an">@DisplayName</span>(<span class="st">"正常系：ユーザー登録が成功する"</span>)
+<span class="kw">void</span> <span class="mt">create_正常系</span>() {
+    <span class="cm">// Arrange（準備）</span>
+    <span class="tp">UserCreateRequest</span> request = <span class="kw">new</span> <span class="tp">UserCreateRequest</span>();
+    request.<span class="mt">setName</span>(<span class="st">"田中太郎"</span>);
+    request.<span class="mt">setEmail</span>(<span class="st">"tanaka@example.com"</span>);
+​
+    when(userRepository.<span class="mt">existsByEmail</span>(<span class="st">"tanaka@example.com"</span>)).<span class="mt">thenReturn</span>(<span class="vl">false</span>);
+    <span class="tp">User</span> savedUser = <span class="tp">User</span>.<span class="mt">builder</span>().id(<span class="vl">1L</span>).name(<span class="st">"田中太郎"</span>).email(<span class="st">"tanaka@example.com"</span>).<span class="mt">build</span>();
+    when(userRepository.<span class="mt">save</span>(any(<span class="tp">User</span>.<span class="kw">class</span>))).<span class="mt">thenReturn</span>(savedUser);
+​
+    <span class="cm">// Act（実行）</span>
+    <span class="tp">UserResponse</span> result = userService.<span class="mt">create</span>(request);
+​
+    <span class="cm">// Assert（検証）</span>
+    assertThat(result).<span class="mt">isNotNull</span>();
+    assertThat(result.getUserId()).<span class="mt">isEqualTo</span>(<span class="vl">1L</span>);
+    assertThat(result.getName()).<span class="mt">isEqualTo</span>(<span class="st">"田中太郎"</span>);
+    verify(userRepository, times(<span class="vl">1</span>)).<span class="mt">existsByEmail</span>(<span class="st">"tanaka@example.com"</span>);
+    verify(userRepository, times(<span class="vl">1</span>)).<span class="mt">save</span>(any());
+}
+​
+<span class="an">@Test</span>
+<span class="an">@DisplayName</span>(<span class="st">"異常系：メール重複の場合はBusinessExceptionがスローされる"</span>)
+<span class="kw">void</span> <span class="mt">create_異常系_メール重複</span>() {
+    <span class="cm">// Arrange</span>
+    <span class="tp">UserCreateRequest</span> request = <span class="kw">new</span> <span class="tp">UserCreateRequest</span>();
+    request.<span class="mt">setEmail</span>(<span class="st">"duplicate@example.com"</span>);
+    when(userRepository.<span class="mt">existsByEmail</span>(<span class="st">"duplicate@example.com"</span>)).<span class="mt">thenReturn</span>(<span class="vl">true</span>);
+​
+    <span class="cm">// Act &amp; Assert</span>
+    assertThatThrownBy(() -&gt; userService.<span class="mt">create</span>(request))
+        .<span class="mt">isInstanceOf</span>(<span class="tp">BusinessException</span>.<span class="kw">class</span>)
+        .<span class="mt">hasMessageContaining</span>(<span class="st">"メールアドレスが既に存在します"</span>);
+​
+    <span class="cm">// save は呼ばれていないことを確認（重要！）</span>
+    verify(userRepository, never()).<span class="mt">save</span>(any());
+}</div>
+    </div>
+  </div>
+​
+  <!-- ===== MVC テスト ===== -->
+  <div class="topic" id="d3-mvc">
+    <div class="topic-title"><span class="topic-icon">🌐</span>Controller の結合テスト（MockMvc） <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>@WebMvcTest を使ったControllerテスト</h4>
+      <div class="code"><span class="an">@WebMvcTest</span>(<span class="tp">UserController</span>.<span class="kw">class</span>)         <span class="cm">// Controllerだけロードする軽量テスト</span>
+<span class="kw">class</span> <span class="tp">UserControllerTest</span> {
+​
+    <span class="an">@Autowired</span>
+    <span class="kw">private</span> <span class="tp">MockMvc</span> mockMvc;
+​
+    <span class="an">@MockBean</span>                               <span class="cm">// Serviceをモックに置き換え</span>
+    <span class="kw">private</span> <span class="tp">UserService</span> userService;
+​
+    <span class="an">@Autowired</span>
+    <span class="kw">private</span> <span class="tp">ObjectMapper</span> objectMapper;     <span class="cm">// JavaオブジェクトをJSONに変換</span>
+​
+    <span class="an">@Test</span>
+    <span class="an">@DisplayName</span>(<span class="st">"GET /api/users/{id} 正常系 → 200 OK"</span>)
+    <span class="kw">void</span> <span class="mt">getUser_正常系</span>() <span class="kw">throws</span> <span class="tp">Exception</span> {
+        <span class="tp">UserResponse</span> response = <span class="kw">new</span> <span class="tp">UserResponse</span>(<span class="vl">1L</span>, <span class="st">"田中太郎"</span>, <span class="st">"t@example.com"</span>);
+        when(userService.<span class="mt">findById</span>(<span class="vl">1L</span>)).<span class="mt">thenReturn</span>(response);
+​
+        mockMvc.<span class="mt">perform</span>(<span class="mt">get</span>(<span class="st">"/api/users/1"</span>)
+                .<span class="mt">contentType</span>(MediaType.APPLICATION_JSON))
+            .<span class="mt">andExpect</span>(<span class="mt">status</span>().<span class="mt">isOk</span>())
+            .<span class="mt">andExpect</span>(<span class="mt">jsonPath</span>(<span class="st">"$.userId"</span>).<span class="mt">value</span>(<span class="vl">1L</span>))
+            .<span class="mt">andExpect</span>(<span class="mt">jsonPath</span>(<span class="st">"$.name"</span>).<span class="mt">value</span>(<span class="st">"田中太郎"</span>))
+            .<span class="mt">andExpect</span>(<span class="mt">jsonPath</span>(<span class="st">"$.email"</span>).<span class="mt">value</span>(<span class="st">"t@example.com"</span>))
+            .<span class="mt">andDo</span>(<span class="mt">print</span>());   <span class="cm">// テスト実行時にリクエスト/レスポンスを出力</span>
+    }
+​
+    <span class="an">@Test</span>
+    <span class="an">@DisplayName</span>(<span class="st">"GET /api/users/{id} 未発見 → 404 Not Found"</span>)
+    <span class="kw">void</span> <span class="mt">getUser_未発見</span>() <span class="kw">throws</span> <span class="tp">Exception</span> {
+        when(userService.<span class="mt">findById</span>(<span class="vl">999L</span>)).<span class="mt">thenThrow</span>(<span class="kw">new</span> <span class="tp">ResourceNotFoundException</span>(<span class="st">"User"</span>, <span class="vl">999L</span>));
+​
+        mockMvc.<span class="mt">perform</span>(<span class="mt">get</span>(<span class="st">"/api/users/999"</span>))
+            .<span class="mt">andExpect</span>(<span class="mt">status</span>().<span class="mt">isNotFound</span>())
+            .<span class="mt">andExpect</span>(<span class="mt">jsonPath</span>(<span class="st">"$.errorCode"</span>).<span class="mt">value</span>(<span class="st">"ERR_NOT_FOUND"</span>));
+    }
+​
+    <span class="an">@Test</span>
+    <span class="an">@DisplayName</span>(<span class="st">"POST /api/users バリデーションエラー → 400 Bad Request"</span>)
+    <span class="kw">void</span> <span class="mt">createUser_バリデーションエラー</span>() <span class="kw">throws</span> <span class="tp">Exception</span> {
+        <span class="tp">UserCreateRequest</span> badRequest = <span class="kw">new</span> <span class="tp">UserCreateRequest</span>();
+        badRequest.<span class="mt">setName</span>(<span class="st">""</span>);           <span class="cm">// 空文字（バリデーションエラー）</span>
+        badRequest.<span class="mt">setEmail</span>(<span class="st">"invalid"</span>);  <span class="cm">// メール形式不正</span>
+​
+        mockMvc.<span class="mt">perform</span>(<span class="mt">post</span>(<span class="st">"/api/users"</span>)
+                .<span class="mt">contentType</span>(MediaType.APPLICATION_JSON)
+                .<span class="mt">content</span>(objectMapper.<span class="mt">writeValueAsString</span>(badRequest)))
+            .<span class="mt">andExpect</span>(<span class="mt">status</span>().<span class="mt">isBadRequest</span>())   <span class="cm">// 400</span>
+            .<span class="mt">andExpect</span>(<span class="mt">jsonPath</span>(<span class="st">"$.errorCode"</span>).<span class="mt">value</span>(<span class="st">"ERR_VALIDATION"</span>));
+​
+        <span class="cm">// バリデーションエラーでは Service は呼ばれない</span>
+        verify(userService, never()).<span class="mt">create</span>(any());
+    }
+}</div>
+    </div>
+  </div>
+​
+  <!-- ===== テストケース設計 ===== -->
+  <div class="topic" id="d3-design">
+    <div class="topic-title"><span class="topic-icon">📋</span>テストケース設計の鉄則 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>4つの観点（これだけ意識すれば現場レベル）</h4>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>観点</th><th>具体例（ユーザー登録APIで考える）</th><th>テスト数の目安</th></tr>
+          <tr><td>✅ 正常系</td><td>正しいデータで登録成功・レスポンスが正しい</td><td>1〜3件</td></tr>
+          <tr><td>⚠️ 境界値</td><td>名前50文字（OK）・51文字（NG）、年齢0（OK）・150（OK）・-1（NG）・151（NG）</td><td>境界の上下で各2件</td></tr>
+          <tr><td>❌ 形式不正</td><td>メールアドレス形式不正・nameがnull・ageが文字列</td><td>入力項目数×1〜2件</td></tr>
+          <tr><td>🔒 業務ルール違反</td><td>メール重複・存在しない部署ID・削除済みユーザーへの操作</td><td>業務ルール数×1件以上</td></tr>
+        </table>
+      </div>
+​
+      <h4 style="margin-top:18px;">テストケース一覧の書き方（設計書への記載）</h4>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>No.</th><th>テストケース名</th><th>入力値</th><th>期待結果</th><th>観点</th></tr>
+          <tr><td>1</td><td>正常登録</td><td>name="田中",email="t@x.com",age=30</td><td>201・userId返却</td><td>正常系</td></tr>
+          <tr><td>2</td><td>名前50文字ちょうど</td><td>name=50文字</td><td>201 OK</td><td>境界値（上限）</td></tr>
+          <tr><td>3</td><td>名前51文字</td><td>name=51文字</td><td>400・エラーメッセージ</td><td>境界値（上限超え）</td></tr>
+          <tr><td>4</td><td>名前未入力</td><td>name=null</td><td>400・ERR_VALIDATION</td><td>形式不正</td></tr>
+          <tr><td>5</td><td>メール重複</td><td>登録済みメール</td><td>409・ERR_001</td><td>業務ルール</td></tr>
+        </table>
+      </div>
+​
+      <div class="alert aw" style="margin-top:12px;"><span class="ai">⚠️</span><span>正常系のみのテストは「テストをしていない」に等しい。レビューでは<strong>「異常系のテストはありますか？」が必ず聞かれる</strong>。境界値と業務ルール違反のテストは必ず書く。</span></div>
+    </div>
+  </div>
+​
+  <!-- ===== バグ票 ===== -->
+  <div class="topic" id="d3-bug">
+    <div class="topic-title"><span class="topic-icon">🐛</span>バグ票の書き方 <span class="tag tp2">重要</span></div>
+​
+    <div class="card">
+      <h4>バグ票の6必須項目と実際の記入例</h4>
+      <div class="code"><span class="hl">タイトル：</span>
+ユーザー登録APIで年齢に文字列を入力すると500エラーになる（400を期待）
+​
+<span class="hl">再現手順：</span>
+1. POST /api/users に以下のリクエストを送信
+   { "name": "田中太郎", "email": "t@example.com", "age": "三十" }
+2. レスポンスを確認
+​
+<span class="hl">期待値：</span>
+HTTPステータス 400 Bad Request が返却される
+レスポンスボディに入力値エラーのエラーコードが含まれる
+​
+<span class="hl">実際の値：</span>
+HTTPステータス 500 Internal Server Error が返却される
+（スクリーンショット添付）
+ログ: [ERROR] HttpMessageNotReadableException: JSON parse error...
+​
+<span class="hl">環境：</span>
+OS: macOS 14.2 / Windows 11
+ブラウザ: Chrome 121.0.6167
+バックエンド: Spring Boot 3.2.1 / Java 21
+テスト環境: dev（192.168.xx.xx:8080）
+​
+<span class="hl">深刻度：</span>
+中（業務影響：不正な入力でサーバーエラーになるがデータ破壊はなし）
+​
+<span class="hl">備考：</span>
+age が Integer 型のため、文字列が来た場合に HttpMessageNotReadableException が
+発生していると推測。@ExceptionHandler での対応が必要と思われる。</div>
+​
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <tr><th>深刻度</th><th>基準</th><th>対応優先度</th></tr>
+          <tr><td>致命的</td><td>業務が完全に止まる・データが壊れる</td><td>即日対応</td></tr>
+          <tr><td>高</td><td>主要機能が動作しない</td><td>当日〜翌日</td></tr>
+          <tr><td>中</td><td>一部機能に影響・回避策あり</td><td>今スプリント内</td></tr>
+          <tr><td>低</td><td>表示崩れ・軽微な不具合</td><td>次スプリント以降</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+​
+  <!-- Day3 チェック -->
+  <div class="topic" id="d3-check">
+    <div class="topic-title"><span class="topic-icon">✅</span>Day 3 習得チェックリスト</div>
+    <div class="card">
+      <ul class="cklist">
+        <li><span class="chk" onclick="ck(this)"></span>UT・IT・ST・UATの違いと担当者を説明できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>@Test/@DisplayName/@BeforeEach/@ParameterizedTestの使い方がわかる</li>
+        <li><span class="chk" onclick="ck(this)"></span>AssertJのisEqualTo/isNotNull/hasSize/assertThatThrownByが書ける</li>
+        <li><span class="chk" onclick="ck(this)"></span>when/thenReturn/verify/ArgumentCaptorを使ったMockitoテストが書ける</li>
+        <li><span class="chk" onclick="ck(this)"></span>@WebMvcTestでControllerのHTTPテストが書ける</li>
+        <li><span class="chk" onclick="ck(this)"></span>正常系・境界値・形式不正・業務ルール違反の4観点でテストケースを設計できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>バグ票の6項目（タイトル/手順/期待値/実際/環境/深刻度）を揃えて起票できる</li>
+        <li><span class="chk" onclick="ck(this)"></span>save()が呼ばれていないことをverify(repo, never()).save(any())で確認できる</li>
+      </ul>
+    </div>
+  </div>
+</div>
+​
+<!-- ============================================================ DAY 4 TIPS -->
+<div id="d4" class="day-section d4">
+  <div class="sec-header">
+    <div class="sec-label">SURVIVAL GUIDE</div>
+    <h2>現場サバイバル術</h2>
+    <p>技術力より先に「現場で信頼される行動習慣」を身につける。2年半の先輩との差を埋める最速の方法はここにある。</p>
+  </div>
+​
+  <!-- ===== 質問 ===== -->
+  <div class="topic" id="d4-q">
+    <div class="topic-title"><span class="topic-icon">🙋</span>質問の作法 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>「わからないことがあります」だけで来るのは最悪</h4>
+      <p class="lead">先輩の時間を奪うだけでなく「何も調べていないのかな」と思われる。以下のテンプレートで質問すれば「ちゃんと考えてから来てくれた」と伝わる。</p>
+​
+      <div class="code"><span class="cm">【質問テンプレート】</span>
+​
+<span class="hl">件名（Slackのスレッドタイトルや口頭での最初の一言）:</span>
+UserServiceの@Transactionalについて確認させてください
+​
+<span class="hl">やりたいこと:</span>
+ユーザー登録APIのServiceメソッドを実装中です
+​
+<span class="hl">試したこと・調べたこと:</span>
+・Spring公式ドキュメントで@Transactionalの説明を確認しました
+・既存のOrderService#createには@Transactionalがついていました
+・writeするメソッドには@Transactionalが必要と理解しています
+​
+<span class="hl">現在の状況:</span>
+users テーブルへのINSERT1件だけの場合でも@Transactionalは必要でしょうか？
+自分の実装では以下のようにしています：
+    @Transactional
+    public UserResponse create(UserCreateRequest request) { ... }
+​
+<span class="hl">確認したいこと:</span>
+①この理解で合っているか
+②INSERTが1件だけの場合でも@Transactionalをつけるべきか</div>
+​
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table>
+          <tr><th>タイミング</th><th>判断基準</th></tr>
+          <tr><td>すぐ聞く（5分以内）</td><td>「仕様の解釈が合っているか」の確認・方向性確認（実装前に確認するのが礼儀）</td></tr>
+          <tr><td>30分悩んだら聞く</td><td>技術的な詰まり（エラー・実装方法の選択）</td></tr>
+          <tr><td>自力解決を目指す</td><td>公式ドキュメントや既存コードを読めば解決できそうなもの</td></tr>
+        </table>
+      </div>
+​
+      <div class="alert as"><span class="ai">✅</span><span><strong>30分ルール：</strong>30分調べても解決しなければ質問する。30分は長すぎず短すぎない黄金律。詰まったまま半日費やして夕方に「実は進んでいません」が一番NG。</span></div>
+    </div>
+  </div>
+​
+  <!-- ===== タスク管理 ===== -->
+  <div class="topic" id="d4-task">
+    <div class="topic-title"><span class="topic-icon">📅</span>タスク管理と報告の習慣 <span class="tag tm">MUST</span></div>
+​
+    <div class="card">
+      <h4>1日の行動パターン</h4>
+      <ul class="steps">
+        <li><span class="snum">朝</span><div class="scontent"><strong>今日やることを宣言する（朝会・Slack）</strong><span>「本日はユーザー登録APIの実装とテストを完了させる予定です。詰まりそうな箇所があれば昼頃に相談させてください。」— 何をやるか共有することで方向性のズレを早期発見できる。</span></div></li>
+        <li><span class="snum">中</span><div class="scontent"><strong>詰まったら30分ルール</strong><span>30分調べても解決しなければすぐ質問する。「少し確認させてください、〇〇で詰まっていて…」と先に伝えてから状況を説明する。</span></div></li>
+        <li><span class="snum">中</span><div class="scontent"><strong>小さく確認を繰り返す</strong><span>「ここまで実装しましたが方向性合っていますか？」を1〜2時間ごとにやる。大きく作ってから「全部やり直し」は最悪のパターン。</span></div></li>
+        <li><span class="snum">夕</span><div class="scontent"><strong>進捗報告は「完了・残り・リスク」の3点セットで</strong><span>「ユーザー登録APIの実装が完了しました。明日は単体テストを書く予定です。バリデーションの仕様で少し不明点があるので明日の朝に確認させてください。」</span></div></li>
+      </ul>
+​
+      <h4 style="margin-top:18px;">見積もりの精度を上げるコツ</h4>
+      <div class="code"><span class="cm"># 作業見積もりは「自分の感覚 × 1.5〜2倍」が現実的</span>
+​
+自分の感覚: 実装に2時間
+実際の時間: セットアップ・調査・レビュー対応含めると3〜4時間
+​
+<span class="cm"># 見積もりを伝えるときは「根拠」もセットで</span>
+「設計書を見た感じ、〇〇機能の実装で3〜4時間みています。
+ 初めてのDBアクセス実装なので少し余裕をみています。」
+​
+<span class="cm"># 遅れそうになったら早めに報告</span>
+「午前中に完了予定でしたが、〇〇で詰まっており
+ 午後の△時頃になりそうです。何かご調整が必要でしょうか？」</div>
+    </div>
+  </div>
+​
+  <!-- ===== エラー対処 ===== -->
+  <div class="topic" id="d4-err">
+    <div class="topic-title"><span class="topic-icon">🔥</span>エラー発生時の対処フロー <span class="tag tp2">重要</span></div>
+​
+    <div class="card">
+      <h4>Spring Boot の代表的なエラーと対処法</h4>
+      <div class="code"><span class="cm">## 1. NullPointerException</span>
+java.lang.NullPointerException: Cannot invoke "String.length()" because "str" is null
+​
+対処:
+→ どの変数がnullかJava 17以降はメッセージに出る
+→ Optional.orElseThrow() の使い忘れ
+→ @Autowired / @RequiredArgsConstructor のDI漏れ（フィールドに null のまま）
+​
+<span class="cm">## 2. UnsatisfiedDependencyException（起動時エラー）</span>
+UnsatisfiedDependencyException: Error creating bean with name 'userController'
+​
+対処:
+→ @Service / @Repository / @Component アノテーション忘れ
+→ コンポーネントスキャン対象のパッケージ外にクラスがある
+→ @Mapper（MyBatis）の付け忘れ
+​
+<span class="cm">## 3. HttpMessageNotReadableException（400エラー）</span>
+HttpMessageNotReadableException: JSON parse error
+​
+対処:
+→ JSONのキー名とDTOのフィールド名が合っていない
+→ 型が合っていない（ageに文字列を送った等）
+→ リクエストボディが空
+​
+<span class="cm">## 4. LazyInitializationException（JPAで頻出）</span>
+LazyInitializationException: could not initialize proxy - no Session
+​
+対処:
+→ @Transactionalの外でLazyロードしようとした
+→ Serviceメソッドに @Transactional(readOnly=true) をつける
+→ または @Eager に変更（N+1問題に注意）
+​
+<span class="cm">## 5. DataIntegrityViolationException</span>
+DataIntegrityViolationException: ... Duplicate entry 'xxx' for key 'email'
+​
+対処:
+→ UNIQUEキー制約違反（メール重複など）
+→ Serviceの重複チェックが漏れている
+→ または同時リクエストによる競合 → DBのUNIQUE制約で最終防衛
+​
+<span class="cm">## スタックトレースの読み方</span>
+<span class="cm"># 例外が発生したときは「Caused by:」の行が本当の原因</span>
+ERROR ... UserService.create(UserService.java:45)   ← 発生箇所
+  Caused by: org.springframework.dao.DataIntegrityViolationException  ← 本当の原因</div>
+    </div>
+  </div>
+​
+  <!-- ===== 現場用語 ===== -->
+  <div class="topic" id="d4-words">
+    <div class="topic-title"><span class="topic-icon">💬</span>現場用語辞典 <span class="tag tp2">重要</span></div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>用語</th><th>意味</th><th>使われる文脈</th></tr>
+          <tr><td>エビデンス</td><td>テスト実施の証拠（スクショ・ログ）</td><td>「テストのエビデンスをExcelに貼って」</td></tr>
+          <tr><td>デグレ（デグレード）</td><td>既存機能が修正で壊れること（リグレッション）</td><td>「デグレしてないか確認して」</td></tr>
+          <tr><td>横展開</td><td>同じ修正を他の箇所にも適用すること</td><td>「このバグ修正を横展開して」</td></tr>
+          <tr><td>塩漬け</td><td>ずっと後回しにされているタスク</td><td>「このチケット塩漬けになってる」</td></tr>
+          <tr><td>仕様通り</td><td>設計書・仕様書の通りの動作でバグではない</td><td>「それ仕様通りなのでバグじゃない」</td></tr>
+          <tr><td>スコープ外</td><td>今回の対象範囲に含まれない</td><td>「その要件は今回のスコープ外」</td></tr>
+          <tr><td>ナレッジ</td><td>知見・ノウハウ・調査結果</td><td>「ナレッジをWikiにまとめて」</td></tr>
+          <tr><td>LGTM</td><td>Looks Good To Me（コードレビューOK）</td><td>GitHubのPRコメントで見る</td></tr>
+          <tr><td>nit</td><td>nitpick（細かい指摘・直さなくてもOK）</td><td>「nit: ここのコメント英語に直せると〇」</td></tr>
+          <tr><td>ペンディング</td><td>決定が保留中</td><td>「この仕様はペンディングで、来週確認」</td></tr>
+          <tr><td>エスカレーション</td><td>問題を上位者に報告・判断を仰ぐ</td><td>「これPMにエスカレーションが必要」</td></tr>
+          <tr><td>握る</td><td>口頭・非公式で合意する</td><td>「先方と仕様を握った」</td></tr>
+          <tr><td>巻き取る</td><td>他の人のタスクを引き受ける</td><td>「その作業俺が巻き取ります」</td></tr>
+          <tr><td>FYI</td><td>For Your Information（参考までに）</td><td>Slackで情報共有するとき</td></tr>
+          <tr><td>WF（ウォーターフォール）</td><td>要件定義→設計→実装→テストを順番に進める開発手法</td><td>「このプロジェクトはWFで進めてます」</td></tr>
+          <tr><td>AGI / アジャイル</td><td>スプリント単位で開発を繰り返す手法</td><td>「アジャイルでやってるので2週間スプリント」</td></tr>
+        </table>
+      </div>
+​
+      <div class="alert as" style="margin-top:12px;"><span class="ai">🚀</span><span>2年半の先輩との差は「技術力」より<strong>「動き方・コミュニケーション・報告の習慣」</strong>で縮まる。技術はあとからついてくる。まず信頼を得ることが最優先。</span></div>
+    </div>
+  </div>
+</div>
+​
+</main>
+</div><!-- /wrap -->
+​
+<script>
+function showDay(id, btn) {
+  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.className = 'tab');
+  document.getElementById(id).classList.add('active');
+  const map = {d1:'a1',d2:'a2',d3:'a3',d4:'a4'};
+  btn.classList.add(map[id]);
+  updateSidebar();
+}
+​
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+​
+function ck(el) {
+  el.classList.toggle('done');
+  el.textContent = el.classList.contains('done') ? '✓' : '';
+}
+​
+function updateSidebar() {
+  const activeDay = document.querySelector('.day-section.active').id;
+  document.querySelectorAll('.sb-link').forEach(link => {
+    const target = link.getAttribute('onclick').match(/'([^']+)'/)[1];
+    link.classList.toggle('active', document.getElementById(target)?.closest('.day-section')?.id === activeDay && false);
+  });
+}
+​
+// Intersection Observer でサイドバーのアクティブ状態を更新
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      document.querySelectorAll('.sb-link').forEach(link => {
+        const m = link.getAttribute('onclick').match(/'([^']+)'/);
+        if (m && m[1] === id) {
+          document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, {rootMargin: '-10% 0px -80% 0px'});
+​
+document.querySelectorAll('.topic[id]').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
